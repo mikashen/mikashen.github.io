@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2/L3 進階動畫</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>L2/L3 進階動畫：深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</h1>
+        <p class="subtitle">進階互動式 L2/L3 交換器動畫</p>
+    </header>
+
+    
+
+    <div id="advanced-animation" class="content-section active">
+        <div class="container">
+            <div class="animation-content-area">
+            <div class="simulation-wrapper">
+                <div id="animation-canvas" class="animation-canvas">
+                    <svg id="topology-svg" width="100%" height="100%"></svg>
+                    <!-- Devices and packets will be added here by JS -->
+                </div>
+                <div class="info-tables-wrapper">
+                    <div id="mac-table-container" class="info-box">
+                        <h4><span id="switch-name">L2-Switch</span> MAC Address Table</h4>
+                        <table id="mac-table">
+                            <thead><tr><th>MAC Address</th><th>Port</th><th>VLAN</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="arp-table-container" class="info-box" style="display:none;">
+                        <h4><span id="switch-name-arp">L3-Switch</span> ARP Table</h4>
+                        <table id="arp-table">
+                            <thead><tr><th>IP Address</th><th>MAC Address</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="controls-explanation-wrapper">
+                    <div class="controls card">
+                        <h2>動畫控制器</h2>
+                        <div class="control-group">
+                            <label for="scenario">選擇場景：</label>
+                            <select id="scenario">
+                                <option value="arl_table_operation">1. ARL Table 運作演示</option>
+                                <option value="l2_flood">2. L2 首次通訊 (Flooding)</option>
+                                <option value="l2_unicast">3. L2 後續通訊 (Unicast)</option>
+                                <option value="l3_arp">4. L3 跨網段通訊 (含 ARP)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <button id="start-btn">開始動畫</button>
+                            <button id="reset-btn">重設</button>
+                        </div>
+                    </div>
+                    <div id="explanation" class="card">
+                        <h2>運作解說</h2>
+                        <p id="explanation-text">請選擇一個場景並點擊「開始動畫」。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="common.js"></script>
+    <script src="advanced.js"></script>
+</body>
+</html>

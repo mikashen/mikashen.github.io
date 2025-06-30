@@ -1,0 +1,457 @@
+/* General Body and Layout */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --l2-color: #2ecc71;
+    --l3-color: #e74c3c;
+    --vlan10-bg: rgba(52, 152, 219, 0.08);
+    --vlan20-bg: rgba(231, 76, 60, 0.08);
+    --packet-data-color: #f1c40f;
+    --packet-arp-color: #9b59b6;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex; /* Use flexbox for overall layout */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+.container, .intro-container, .vlan-intro-container {
+    width: 95%;
+    max-width: 1500px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* New: Main content wrapper for pages with sidebar */
+.main-content-wrapper {
+    flex-grow: 1; /* Allows main content to take available space */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, var(--secondary-color), #34495e);
+    color: #ecf0f1;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+h1 { font-size: 2.2rem; margin: 0; }
+.subtitle { font-size: 1.1rem; color: #bdc3c7; margin-top: 0.5rem; }
+
+/* Navigation (now for sidebar) */
+.main-nav {
+    background-color: var(--secondary-color);
+    padding: 0.8rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.main-nav a {
+    color: white;
+    font-weight: bold;
+}
+
+.main-nav a:visited {
+    color: white;
+}
+
+/* New: Sidebar styles */
+.sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: var(--secondary-color);
+    color: #ecf0f1;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed; /* Make it fixed */
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    height: 100vh; /* Take full viewport height */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Adjust main content to not be hidden by fixed sidebar */
+.main-content-wrapper {
+    flex-grow: 1; /* Allows main content to take available space */
+    display: flex;
+    flex-direction: column;
+    margin-left: 250px; /* Offset by sidebar width */
+}
+
+.sidebar .main-nav {
+    background-color: transparent; /* No background for nav inside sidebar */
+    box-shadow: none;
+    padding: 0;
+}
+
+.sidebar .main-nav ul {
+    flex-direction: column; /* Stack links vertically */
+    align-items: flex-start; /* Align links to the start */
+}
+
+.sidebar .main-nav li {
+    width: 100%; /* Full width for list items */
+    margin: 0;
+}
+
+.sidebar .main-nav a {
+    display: block; /* Make links fill the width */
+    padding: 12px 20px; /* More padding for sidebar links */
+    text-align: left; /* Align text to the left */
+    border-radius: 0; /* No border radius for full-width links */
+    font-weight: bold; /* Make text bold */
+    color: white; /* Ensure default color */
+}
+
+.sidebar .main-nav a:visited {
+    color: white; /* Keep visited links the same color */
+}
+
+.sidebar .main-nav a:hover {
+    background-color: #34495e;
+}
+
+.sidebar .main-nav a.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Content Sections */
+.content-section {
+    display: block; /* Always block for sub-pages */
+    flex-grow: 1; /* Allow content section to grow */
+}
+
+/* Card style */
+.card { background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; }
+
+/* Intro Section */
+.intro-card {
+    padding: 2rem;
+    background-color: #eaf5fb;
+    border-left: 5px solid var(--primary-color);
+}
+.intro-card h2 { color: var(--secondary-color); margin-top: 0; }
+.intro-columns { display: flex; gap: 2rem; margin: 1.5rem 0; }
+.intro-column { flex: 1; }
+.intro-column h3 { color: var(--primary-color); }
+.intro-column .emoji { font-size: 1.5rem; margin-right: 0.5rem; }
+.intro-summary { font-weight: bold; color: var(--secondary-color); margin-top: 1rem; }
+
+/* VLAN Intro Section */
+.vlan-intro-card {
+    padding: 2rem;
+    background-color: #f0f8f0; /* Light green background */
+    border-left: 5px solid var(--l2-color); /* Green border */
+}
+.vlan-intro-card h2 { color: var(--secondary-color); margin-top: 0; }
+
+/* Main Layout Wrappers */
+.simulation-wrapper { flex: 3; display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.controls-explanation-wrapper { flex: 2; display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+
+/* Animation Content Area */
+.animation-content-area {
+    display: flex;
+    gap: 2rem;
+}
+
+/* Animation Canvas (common styles) */
+.animation-canvas {
+    background-color: #fff;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: 100%;
+    height: 500px; /* Fixed height */
+    display: flex;
+    flex-direction: column;
+}
+
+#topology-svg, #vlan-topology-svg, #unicast-multicast-broadcast-topology-svg, #flow-control-topology-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%; /* Animation area takes 80% height */
+    z-index: 1;
+}
+
+.device {
+    position: absolute;
+    text-align: center;
+    z-index: 5;
+    transform: translate(-50%, -50%); /* Center the device based on its top-left corner */
+}
+
+.vlan-area {
+    position: absolute;
+    border-radius: 15px;
+    z-index: 2;
+    padding-top: 40px; /* Space for the label */
+    box-sizing: border-box;
+}
+
+/* Info Tables */
+.info-tables-wrapper { display: flex; gap: 1rem; }
+.info-box { flex: 1; background-color: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); min-width: 0; }
+.info-box h4 { margin-top: 0; color: var(--secondary-color); text-align: center; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+#mac-table, #arp-table, #vlan-mac-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; font-family: 'Roboto Mono', monospace; table-layout: fixed; }
+#mac-table th, #mac-table td, #arp-table th, #arp-table td, #vlan-mac-table th, #vlan-mac-table td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; word-wrap: break-word; }
+#mac-table th, #arp-table th, #vlan-mac-table th { background-color: var(--secondary-color); color: white; }
+
+/* Controls & Explanation */
+.controls h2, #explanation h2, #vlan-explanation h2, #umb-explanation h2, #flow-control-explanation h2 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid #e0e0e0; padding-bottom: 0.5rem; }
+.control-group { margin-bottom: 1rem; }
+.control-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+#scenario, #vlan-scenario, #umb-scenario { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+
+button { background-color: var(--primary-color); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: background-color 0.2s, transform 0.2s; margin-right: 10px; }
+button:hover { background-color: #2980b9; transform: translateY(-2px); }
+button:disabled { background-color: #bdc3c7; cursor: not-allowed; transform: none; }
+#reset-btn, #reset-vlan-btn, #reset-umb-btn, #reset-flow-control-btn { background-color: var(--l3-color); }
+#reset-btn:hover, #reset-vlan-btn:hover, #reset-umb-btn:hover, #reset-flow-control-btn:hover { background-color: #c0392b; }
+
+/* Footer */
+footer { text-align: center; padding: 1rem; background-color: var(--secondary-color); color: #bdc3c7; font-size: 0.9rem; margin-top: 2rem; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    body { flex-direction: column; }
+    .sidebar {
+        width: 100%;
+        padding: 0;
+        position: relative; /* Override fixed */
+        height: auto; /* Override 100vh */
+        overflow-y: visible; /* Override auto */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Re-add shadow if removed by fixed */
+    }
+    .sidebar .main-nav ul { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+    .sidebar .main-nav li { width: auto; margin: 0 15px; }
+    .sidebar .main-nav a { border-radius: 5px; text-align: center; padding: 8px 15px; }
+    .main-content-wrapper {
+        margin-left: 0; /* Remove offset */
+    }
+    .container { flex-direction: column; }
+    .info-tables-wrapper { flex-direction: row; }
+    .intro-columns { flex-direction: column; }
+}
+
+@media (max-width: 768px) {
+    .info-tables-wrapper { flex-direction: column; }
+    h1 { font-size: 1.8rem; }
+    .subtitle { font-size: 1rem; }
+    .main-nav ul { flex-direction: column; }
+    .main-nav li { margin: 5px 0; }
+}
+
+/* Flow Control Specific Styles */
+.buffer-display {
+    position: absolute;
+    width: 65px;
+    height: 150px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #ecf0f1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.buffer-fill {
+    width: 100%;
+    background-color: #2ecc71;
+    transition: height 0.5s ease-out;
+}
+
+.buffer-label {
+    position: absolute;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.packet.pause {
+    background-color: #f39c12;
+    color: white;
+    border: 1px solid #e67e22;
+}
+
+
+/* Highlight for MAC table rows */
+#mac-table tr.highlight, #vlan-mac-table tr.highlight {
+    background-color: #ffeaa7; /* Light yellow */
+    font-weight: bold;
+}
+
+/* Device Icon Styles */
+.device .icon {
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto; /* Center the icon */
+}
+
+.device.pc .icon {
+    background-image: url('images/workstation.png');
+}
+
+.device.switch .icon {
+    width: 120px; /* Switches are larger */
+    height: 120px;
+    background-image: url('images/router.png'); /* Using router icon for switch */
+}
+
+/* Packet styles */
+.packet {
+    position: absolute;
+    width: 200px;
+    height: 120px; /* Increased height */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Allow content to stack vertically */
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.1s linear;
+    padding: 5px; /* Add some padding */
+    box-sizing: border-box; /* Include padding in width/height */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.packet .packet-info {
+    white-space: normal; /* Allow text to wrap */
+    text-align: center;
+    line-height: 1.2; /* Adjust line height for better spacing */
+}
+
+.packet .packet-info span {
+    display: block; /* Make each span a block element for new line */
+    word-break: break-word; /* Break long words */
+}
+
+.packet.data {
+    background-color: var(--packet-data-color);
+    color: var(--secondary-color);
+    border: 1px solid #b88a0b;
+}
+
+.packet.arp {
+    background-color: var(--packet-arp-color);
+    color: white;
+    border: 1px solid #74428c;
+}
+
+/* Device styles */
+.device {
+    position: absolute;
+    text-align: center;
+    z-index: 5;
+    transform: translate(-50%, -50%); /* Center the device based on its top-left corner */
+}
+
+.device .label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.device-info {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+/* Link styles */
+.link {
+    position: absolute;
+    background-color: #7f8c8d;
+    height: 3px;
+    z-index: 2;
+}
+
+/* VLAN Area Styles */
+.vlan-area {
+    position: absolute;
+    border-radius: 15px;
+    z-index: 2;
+    padding-top: 40px; /* Space for the label */
+    box-sizing: border-box;
+}
+
+.vlan-area.vlan10 {
+    background-color: var(--vlan10-bg);
+    border: 2px dashed var(--primary-color);
+}
+
+.vlan-area.vlan20 {
+    background-color: var(--vlan20-bg);
+    border: 2px dashed var(--l3-color);
+}
+
+.vlan-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.vlan-label.vlan10 {
+    background-color: var(--primary-color);
+}
+
+.vlan-label.vlan20 {
+    background-color: var(--l3-color);
+}
+
+/* Temporary: Force visibility for vlan-container */
+.vlan-container {
+    background-color: rgba(255, 255, 0, 0.5) !important; /* Bright yellow, override everything */
+    border: 5px solid black !important; /* Thick black border, override everything */
+}
+
+/* Port styles */
+.port {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #bdc3c7;
+    border: 1px solid #7f8c8d;
+    border-radius: 3px;
+    z-index: 6;
+}
+
+.port.active {
+    background-color: #2ecc71; /* Green when active */
+}
+
+.port-label {
+    position: absolute;
+    font-size: 0.6rem;
+    color: #2c3e50;
+    font-family: 'Roboto Mono', monospace;
+}

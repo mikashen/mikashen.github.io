@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingress/Egress</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>Packet Ingress / Egress：資料包的進出視角</h1>
+        <p class="subtitle">深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</p>
+    </header>
+
+    
+
+    <div id="ingress-egress-intro" class="content-section active">
+        <div class="intro-container">
+            <div class="intro-card card">
+                <h2>Packet Ingress / Egress：資料包的進出視角</h2>
+                <p>在網路設備（如交換器、路由器）中，我們經常會聽到「Ingress」和「Egress」這兩個詞。它們描述的是資料包進出設備的「方向」和「視角」。理解這兩個概念對於分析網路流量、配置安全策略或排查問題都非常重要。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">➡️</span> Ingress (進入)</h3>
+                        <p>當一個資料包「進入」網路設備的某個埠（Port）時，我們稱之為 <strong>Ingress</strong>。這個視角是從設備「外部」看向設備「內部」。在 Ingress 階段，設備會對資料包進行一系列的處理，例如：</p>
+                        <ul>
+                            <li>檢查資料包的完整性。</li>
+                            <li>應用輸入方向的訪問控制列表 (ACL)。</li>
+                            <li>進行 QoS (服務品質) 分類和標記。</li>
+                            <li>學習來源 MAC 位址 (對於交換器)。</li>
+                        </ul>
+                        <p>想像一下，你是一個海關官員，正在檢查進入國境的旅客。你的視角就是 Ingress。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">⬅️</span> Egress (離開)</h3>
+                        <p>當一個資料包「離開」網路設備的某個埠（Port）時，我們稱之為 <strong>Egress</strong>。這個視角是從設備「內部」看向設備「外部」。在 Egress 階段，設備也會對資料包進行處理，例如：</p>
+                        <ul>
+                            <li>應用輸出方向的訪問控制列表 (ACL)。</li>
+                            <li>進行 QoS 流量整形或限速。</li>
+                            <li>添加 VLAN 標籤 (如果埠是 Trunk 埠)。</li>
+                            <li>移除 VLAN 標籤 (如果埠是 Access 埠)。</li>
+                        </ul>
+                        <p>想像一下，你仍然是海關官員，正在檢查準備離開國境的旅客。你的視角就是 Egress。</p>
+                    </div>
+                </div>
+                <p class="intro-summary">總之，Ingress 和 Egress 總是相對於「網路設備本身」而言的。一個資料包從 Ingress 埠進入設備，經過內部處理後，從 Egress 埠離開設備。</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+</body>
+</html>

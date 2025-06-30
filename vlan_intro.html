@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLAN 機制解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>VLAN 機制解說：虛擬分區，安全又高效</h1>
+        <p class="subtitle">深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</p>
+    </header>
+
+    
+
+    <div id="vlan-intro" class="content-section active">
+        <div class="vlan-intro-container">
+            <div class="vlan-intro-card card">
+                <h2>VLAN 機制解說：虛擬分區，安全又高效</h2>
+                <p>想像一下，你的辦公室裡有不同的部門：業務部、研發部、財務部。如果所有部門都共用同一個大辦公室，大家可以隨意走動、互相打擾，甚至不小心看到不該看的資料。這就是沒有 VLAN 的網路。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">🏢</span> 什麼是 VLAN？</h3>
+                        <p><strong>VLAN (Virtual Local Area Network)</strong> 就像是在同一個物理辦公室裡，用透明的牆壁隔出一個個獨立的「虛擬辦公室」。每個虛擬辦公室（VLAN）都有自己的門牌號碼（IP 網段），裡面的人只能直接和同一個虛擬辦公室裡的人溝通。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">🔒</span> 為什麼需要 VLAN？</h3>
+                        <ul>
+                            <li><strong>安全性：</strong> 財務部的資料只有財務部的人能看到，業務部的人無法直接存取。</li>
+                            <li><strong>廣播域隔離：：</strong> 業務部的大聲喧嘩（廣播風暴）不會影響到研發部的安靜工作。每個 VLAN 都是一個獨立的廣播域。</li>
+                            <li><strong>靈活性：：</strong> 員工換部門時，不需要重新拉線，只需在交換器上重新配置一下，就能把他「搬」到新的虛擬辦公室。</li>
+                            <li><strong>效率：：</strong> 減少不必要的廣播流量，讓網路更有效率。</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+</body>
+</html>

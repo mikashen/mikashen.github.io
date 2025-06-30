@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARP 觀念解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>ARP 觀念解說：IP 到 MAC 的翻譯官</h1>
+        <p class="subtitle">深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</p>
+    </header>
+
+    
+
+    <div id="arp-intro" class="content-section active">
+        <div class="intro-container">
+            <div class="intro-card card">
+                <h2>ARP 觀念解說：IP 到 MAC 的翻譯官</h2>
+                <p>在網路世界中，設備之間溝通需要知道對方的「實體地址」（MAC 位址）。但我們日常使用和記憶的卻是「邏輯地址」（IP 位址）。這就像你知道一個人的名字（IP），但不知道他住在哪裡（MAC）。這時候，就需要一個「翻譯官」來幫忙，它就是 <strong>ARP (Address Resolution Protocol)</strong>。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">❓</span> 為什麼需要 ARP？</h3>
+                        <p>當一台電腦（例如 PC-A）想和另一台電腦（PC-B）通訊時，它知道 PC-B 的 IP 位址，但不知道它的 MAC 位址。在 Layer 2 網路中，資料幀的轉發是依賴 MAC 位址的，所以 PC-A 必須先取得 PC-B 的 MAC 位址。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">🔍</span> ARP 請求 (ARP Request)</h3>
+                        <p>PC-A 會發送一個「ARP 請求」廣播，大喊：「<strong>誰是 192.168.1.100？請告訴我你的 MAC 位址！</strong>」這個請求會被同一個廣播域內的所有設備收到。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">✅</span> ARP 回應 (ARP Reply)</h3>
+                        <p>只有 IP 位址是 192.168.1.100 的那台電腦（PC-B）會回應一個「ARP 回應」，告訴 PC-A：「<strong>我就是 192.168.1.100，我的 MAC 位址是 XX:XX:XX:XX:XX:XX！</strong>」這個回應是單播給 PC-A 的。</p>
+                    </div>
+                </div>
+                <p class="intro-summary">透過 ARP，設備就能將邏輯 IP 位址解析成實體 MAC 位址，從而實現 Layer 2 的資料幀轉發。設備會將這些解析結果儲存在自己的「ARP 快取表」中，以便下次快速查詢。</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+</body>
+</html>

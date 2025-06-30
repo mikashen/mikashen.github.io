@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMU 觀念解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>交換器中的 Memory Management Unit (MMU)：封包緩衝區的智慧管家</h1>
+        <p class="subtitle">深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</p>
+    </header>
+
+    
+
+    <div id="mmu-intro" class="content-section active">
+        <div class="intro-container">
+            <div class="intro-card card">
+                <h2>交換器中的 Memory Management Unit (MMU)：封包緩衝區的智慧管家</h2>
+                <p>在網路交換器中，MMU (Memory Management Unit) 的作用與電腦 CPU 中的 MMU 大相徑庭。交換器中的 MMU 主要負責高效地管理和分配內部緩衝記憶體，以確保資料封包在高速轉發過程中不會丟失，並能處理不同埠口速度和流量突發的情況。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">📦</span> 為什麼需要交換器 MMU？</h3>
+                        <p>想像一下，交換器就像一個繁忙的物流中心。資料封包從不同的入口（Ingress Port）高速湧入，需要被快速處理並從正確的出口（Egress Port）送出。但如果入口的流量太大，或者出口暫時堵塞，就需要一個地方來暫存這些封包，避免它們被丟棄。這個「暫存區」就是緩衝記憶體，而管理它的就是 MMU。</p>
+                        <ul>
+                            <li><strong>緩衝流量突發：：</strong> 當瞬間流量超過埠口處理能力時，MMU 暫存封包，防止丟包。</li>
+                            <li><strong>協調埠口速度差異：</strong> 高速埠口（如 10Gbps）的資料發送到低速埠口（如 1Gbps）時，MMU 緩衝多餘的資料。</li>
+                            <li><strong>避免擁塞丟包：</strong> 智慧地分配緩衝區資源，並配合流量控制機制（如流控），減少網路擁塞時的丟包率。</li>
+                            <li><strong>提高轉發效率：</strong> 快速存取和釋放封包緩衝區，確保資料轉發的低延遲。</li>
+                        </ul>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">📊</span> 緩衝區管理機制</h3>
+                        <p>交換器中的 MMU 通常採用共享緩衝區 (Shared Buffer) 或專用緩衝區 (Dedicated Buffer) 的方式來管理記憶體。現代交換器多採用共享緩衝區，因為它能更靈活地分配記憶體資源，提高利用率。</p>
+                        <ul>
+                            <li><strong>動態分配：</strong> MMU 會根據每個埠口的需求，動態地分配和回收緩衝區空間。</li>
+                            <li><strong>閾值管理：</strong> 設定不同的緩衝區使用閾值，當達到某個閾值時，觸發流量控制機制（如 Pause Frame 或 ECN），通知上游設備減速。</li>
+                            <li><strong>隊列管理：：</strong> 內部通常有多個隊列（Queue），用於區分不同優先級的流量（QoS），MMU 確保高優先級的封包能優先獲得緩衝和轉發。</li>
+                        </ul>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">🛡️</span> 防止丟包的關鍵</h3>
+                        <p>MMU 是交換器實現「無阻塞轉發」和「零丟包」目標的關鍵組件之一。它不僅僅是簡單的記憶體控制器，更是一個複雜的流量管理單元，能夠在微秒級別對數百萬個封包進行高效的存儲、排隊和轉發決策。</p>
+                        <p>在高速網路環境中，即使是微小的緩衝區管理缺陷也可能導致嚴重的性能問題和資料丟失。因此，交換器 MMU 的設計和性能直接影響著整個網路的穩定性和可靠性。</p>
+                    </div>
+                </div>
+                <p class="intro-summary">總之，交換器中的 MMU 是確保資料封包在複雜網路環境中順暢、可靠傳輸的幕後英雄。它透過精密的緩衝區管理，有效應對流量波動和擁塞，是高性能交換器不可或缺的核心技術。</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+</body>
+</html>

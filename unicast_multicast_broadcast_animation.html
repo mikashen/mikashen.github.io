@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>單播/多播/廣播動畫演示</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>單播 (Unicast) / 多播 (Multicast) / 廣播 (Broadcast)：資料傳輸的三種模式</h1>
+        <p class="subtitle">深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</p>
+    </header>
+
+    
+
+    <div id="unicast-multicast-broadcast-intro" class="content-section active">
+        <div class="intro-container">
+            <div class="intro-card card">
+                <h2>單播 (Unicast) / 多播 (Multicast) / 廣播 (Broadcast)：資料傳輸的三種模式</h2>
+                <p>在網路中，資料的傳輸方式可以分為三種基本類型，它們決定了資料包會被傳送到多少個目的地。理解這些模式對於設計高效且可靠的網路至關重要。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">➡️</span> 單播 (Unicast)</h3>
+                        <p><strong>單播</strong> 是一種「一對一」的傳輸模式。資料包從一個來源發送，並且只傳送到一個特定的目的地。這是網路中最常見的傳輸方式，例如你瀏覽網頁、發送電子郵件或下載檔案時，都是使用單播。</p>
+                        <ul>
+                            <li><strong>特點：</strong> 精準、高效，只占用必要頻寬。</li>
+                            <li><strong>應用：：</strong> 網頁瀏覽、檔案傳輸、點對點通訊。</li>
+                        </ul>
+                        <p>想像一下，你打電話給你的朋友，只有你們兩個人能聽到對話。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">👥</span> 多播 (Multicast)</h3>
+                        <p><strong>多播</strong> 是一種「一對多」的傳輸模式。資料包從一個來源發送，但會傳送到一個「特定群組」中的所有成員。只有那些明確表示對該資料感興趣並加入該多播組的設備才會接收到資料。</p>
+                        <ul>
+                            <li><strong>特點：</strong> 節省頻寬，避免重複傳輸，只傳送給感興趣的接收者。</li>
+                            <li><strong>應用：：</strong> 視訊會議、線上直播、股票行情廣播、遊戲伺服器更新。</li>
+                        </ul>
+                        <p>想像一下，你發送一個群組訊息給你的讀書會成員，只有讀書會的成員會收到。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">📢</span> 廣播 (Broadcast)</h3>
+                        <p><strong>廣播</strong> 是一種「一對所有」的傳輸模式。資料包從一個來源發送，並且會傳送到同一個網路區段（廣播域）中的所有設備。所有設備都會接收並處理這個廣播包，無論它們是否需要這個資料。</p>
+                        <ul>
+                            <li><strong>特點：</strong> 簡單直接，但會占用所有設備的資源，容易造成「廣播風暴」。</li>
+                            <li><strong>應用：：</strong> ARP 請求、DHCP 請求（尋找 IP 位址）、某些舊版網路服務發現。</li>
+                        </ul>
+                        <p>想像一下，你在一個大房間裡大喊一聲，房間裡的所有人都能聽到。</p>
+                    </div>
+                </div>
+                <p class="intro-summary">理解這三種傳輸模式對於網路設計和故障排除至關重要。在接下來的動畫中，你將會看到它們在交換器環境中是如何運作的。</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="unicast-multicast-broadcast-animation" class="content-section active">
+        <div class="container">
+        <div class="animation-content-area">
+            <div class="simulation-wrapper">
+                <div id="unicast-multicast-broadcast-animation-canvas" class="animation-canvas">
+                    <svg id="unicast-multicast-broadcast-topology-svg" width="100%" height="100%"></svg>
+                </div>
+                <div class="info-tables-wrapper">
+                    <!-- No specific tables for UMB animation, but keeping the structure -->
+                </div>
+            </div>
+            <div class="controls-explanation-wrapper">
+                <div class="controls card">
+                    <h2>單播/多播/廣播動畫控制器</h2>
+                    <div class="control-group">
+                        <label for="umb-scenario">選擇場景：</label>
+                        <select id="umb-scenario">
+                            <option value="unicast">單播 (Unicast)</option>
+                            <option value="multicast">多播 (Multicast)</option>
+                            <option value="broadcast">廣播 (Broadcast)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <button id="start-umb-btn">開始動畫</button>
+                        <button id="reset-umb-btn">重設</button>
+                    </div>
+                </div>
+                <div id="umb-explanation" class="card">
+                    <h2>運作解說</h2>
+                    <p id="umb-explanation-text">請選擇一個場景並點擊「開始動畫」。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+</div>
+        <p>Mika Shen製作</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="common.js"></script>
+    <script src="unicast_multicast_broadcast.js"></script>
+</body>
+</html>

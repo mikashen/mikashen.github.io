@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交換器硬體架構介紹</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_animation.html">VLAN</a></li>
+                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>交換器硬體架構介紹：內部運作的基石</h1>
+            <p class="subtitle">深入了解交換器各主要硬體元件及其功能</p>
+        </header>
+
+        <div class="content-section active">
+            <div class="intro-container">
+                <div class="intro-card card">
+                    <h2>交換器主要硬體元件</h2>
+                    <p>一個現代網路交換器由多個關鍵硬體元件組成，它們協同工作以實現高效的資料轉發和網路管理。以下是主要的方塊圖元件及其功能：</p>
+
+                    <h3><span class="emoji">🧠</span> CPU (Central Processing Unit)</h3>
+                    <p>交換器的大腦，負責運行作業系統、管理軟體、處理控制平面流量（如路由協定、SNMP、CLI 命令），以及執行各種管理任務。它不直接參與資料轉發。</p>
+
+                    <h3><span class="emoji">🔄</span> Switch ASIC (Application-Specific Integrated Circuit)</h3>
+                    <p>交換器的核心，專為高速資料轉發而設計。它負責處理資料平面流量，包括 MAC 地址學習、查找、封包緩衝、VLAN 處理、QoS (Quality of Service) 和 ACL (Access Control List) 等功能。Switch ASIC 是交換器性能的關鍵決定因素。</p>
+
+                    <h3><span class="emoji">🔗</span> PHY (Physical Layer Transceiver)</h3>
+                    <p>物理層收發器，位於 Switch ASIC 和網路接口之間。它負責將 Switch ASIC 處理的數位訊號轉換為適合在銅纜或光纖上傳輸的類比訊號，反之亦然。PHY 晶片通常與特定的接口類型（如乙太網路、光纖）和速度相關聯。</p>
+
+                    <h3><span class="emoji">💾</span> Flash Memory</h3>
+                    <p>非揮發性記憶體，用於儲存交換器的作業系統映像 (firmware)、啟動配置、日誌文件和其他持久性資料。即使斷電，其中的資料也不會丟失。</p>
+
+                    <h3><span class="emoji">RAM</span> DRAM (Dynamic Random Access Memory)</h3>
+                    <p>揮發性記憶體，作為 CPU 的工作記憶體，用於儲存運行中的作業系統、應用程式資料、路由表、MAC 地址表、緩衝區等。DRAM 的大小會影響交換器處理複雜任務和大量流量的能力。</p>
+
+                    <h3><span class="emoji">⚡</span> Power Supply</h3>
+                    <p>電源供應器，負責將外部電源轉換為交換器內部各元件所需的穩定電壓。通常會有多個電源供應器以提供冗餘，確保設備的可靠運行。</p>
+
+                    <h3><span class="emoji">🌬️</span> FAN (Cooling Fan)</h3>
+                    <p>散熱風扇，用於為交換器內部產生熱量的元件（特別是 Switch ASIC 和 CPU）提供冷卻，確保設備在安全的工作溫度範圍內運行，防止過熱導致性能下降或損壞。</p>
+
+                    <h3><span class="emoji">📊</span> 其他可能元件</h3>
+                    <ul>
+                        <li><strong>管理接口 (Management Ports)</strong>: 如 Console Port (RJ45 或 USB)、Out-of-Band Management Ethernet Port，用於遠端或本地管理交換器。</li>
+                        <li><strong>時鐘晶片 (Clock Generator)</strong>: 提供精確的時鐘訊號，確保各元件同步工作。</li>
+                        <li><strong>LED 指示燈 (LED Indicators)</strong>: 顯示端口狀態、電源狀態、系統狀態等。</li>
+                        <li><strong>按鈕 (Buttons)</strong>: 如 Reset 按鈕、Mode 按鈕。</li>
+                    </ul>
+
+                    <p class="intro-summary">理解這些硬體元件如何協同工作，對於故障排除、性能優化和網路設計都至關重要。</p>
+                </div>
+            </div>
+        </div>
+        <h3><span class="emoji">📊</span> 硬體架構方塊圖</h3>
+        <p>以下是交換器主要硬體元件的方塊圖，展示了它們之間的邏輯連接：</p>
+        <div class="mermaid">
+            graph TD
+                subgraph "Power & Cooling"
+                    PS[PowerSupply]
+                    FAN[CoolingFan]
+                    PS --> FAN
+                end
+
+                subgraph "Main System Flow" TD
+                    subgraph "Management Interfaces"
+                        CONSOLE[ConsolePort]
+                        OOB_MGMT[OOBMgmtEthernet]
+                    end
+
+                    subgraph "Control Plane"
+                        CPU[CPU]
+                        DRAM[DRAM]
+                        Flash[FlashMemory]
+                        CPU <--> DRAM
+                        CPU <--> Flash
+                    end
+
+                    subgraph "Data Plane"
+                        SW_ASIC[SwitchASIC]
+                        PHY[PHY]
+                        HW_INT[HardwareInterfaces]
+                        SW_ASIC <--> PHY
+                        PHY <--> HW_INT
+                    end
+
+                    CPU <--> SW_ASIC
+                    CPU --> CONSOLE
+                    CPU --> OOB_MGMT
+                end
+
+                PS --> CPU
+                PS --> SW_ASIC
+                PS --> PHY
+
+                classDef component fill:#f9f,stroke:#333,stroke-width:2px;
+                class CPU,SW_ASIC,PHY,Flash,DRAM,PS,FAN,HW_INT,CONSOLE,OOB_MGMT component;
+        </div>
+        <p>如果圖表沒有顯示，請檢查瀏覽器控制台是否有錯誤訊息。</p>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+    <script src="./mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
