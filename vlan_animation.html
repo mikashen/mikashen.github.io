@@ -15,13 +15,21 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
             </ul>
         </nav>
     </div>
@@ -48,7 +56,7 @@
                         <ul>
                             <li><strong>安全性：</strong> 財務部的資料只有財務部的人能看到，業務部的人無法直接存取。</li>
                             <li><strong>廣播域隔離：：</strong> 業務部的大聲喧嘩（廣播風暴）不會影響到研發部的安靜工作。每個 VLAN 都是一個獨立的廣播域。</li>
-                            <li><strong>靈活性：：</strong> 員工換部門時，不需要重新拉線，只需在交換器上重新配置一下，就能把他「搬」到新的虛擬辦公室。</li>
+                            <li><strong>靈活性：：</strong> 員工換部門時，不需要重新拉線，只需在Switch上重新配置一下，就能把他「搬」到新的虛擬辦公室。</li>
                             <li><strong>效率：：</strong> 減少不必要的廣播流量，讓網路更有效率。</li>
                         </ul>
                     </div>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumbo Frames (巨型訊框) 介紹</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>Jumbo Frames (巨型訊框)：支援更大的乙太網路訊框，提高資料傳輸效率</h1>
+        <p class="subtitle">深入探索巨型訊框的優勢、原理與應用</p>
+    </header>
+
+    
+
+    <div id="jumbo-frames-intro" class="content-section active">
+        <div class="intro-container">
+            <div class="intro-card card">
+                <h2>Jumbo Frames (巨型訊框)：網路世界的「大包裹」</h2>
+                <p>在乙太網路中，資料是以「訊框 (Frame)」的形式傳輸的。標準的乙太網路訊框最大傳輸單元 (MTU) 是 1500 位元組。而 <strong>Jumbo Frames (巨型訊框)</strong> 則是一種允許傳輸比標準訊框更大的資料包的技術，通常支援高達 9000 位元組的 MTU。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">📦</span> 1. 什麼是巨型訊框？</h3>
+                        <p>想像一下，你要寄送很多小包裹。如果每個包裹都只能裝很少東西，你就要寄很多次。但如果允許你寄送「大包裹」，一次就能裝更多東西，這樣就能減少寄送次數，提高效率。巨型訊框就是網路世界中的「大包裹」。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">🚀</span> 2. 為什麼需要巨型訊框？</h3>
+                        <p>使用巨型訊框的主要優勢在於提高資料傳輸效率和降低 CPU 利用率。當傳輸大量資料時（例如檔案傳輸、資料庫備份、虛擬化環境中的流量），如果使用標準訊框，資料會被分割成許多小訊框，每個訊框都需要額外的標頭和尾部資訊，並且需要網路設備進行多次處理。巨型訊框減少了訊框的數量，從而減少了這些額外開銷。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">⚙️</span> 3. 如何運作？</h3>
+                        <p>要啟用巨型訊框，網路路徑上的所有設備（包括網路卡、Switch、路由器）都必須支援並配置為使用巨型訊框。如果路徑中有任何設備不支援或未配置，則資料包將會被分段 (fragmentation) 或丟棄，導致性能下降或連接問題。</p>
+                    </div>
+                </div>
+                <p class="intro-summary">巨型訊框在資料中心、高效能運算 (HPC) 和儲存網路 (SAN) 等環境中非常有用，因為這些環境需要傳輸大量的資料。接下來的動畫將會展示巨型訊框如何減少傳輸次數，提高效率。</p>
+                <p class="intro-summary"><a href="jumbo_frames_animation.html">點擊這裡觀看 Jumbo Frames 動畫</a></p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+</body>
+</html>

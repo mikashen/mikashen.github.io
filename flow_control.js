@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             packet.remove();
 
             if (flowControlBufferLevel >= 70 && flowControlSending) { // High watermark
-                setFlowControlExplanation('接收端緩衝區達到高水位 (70%)。交換器發送 Pause Frame 給發送端。');
+                setFlowControlExplanation('接收端緩衝區達到高水位 (70%)。Switch發送 Pause Frame 給發送端。');
                 flowControlSending = false; // Stop sending data packets
                 const pausePacket = createFlowControlPacket('pause_frame', 'pause', fcSwitch, sender);
                 await moveFlowControlPacket(pausePacket, fcSwitch, sender);

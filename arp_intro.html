@@ -15,13 +15,21 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
             </ul>
         </nav>
     </div>
@@ -41,7 +49,7 @@
                 <div class="intro-columns">
                     <div class="intro-column">
                         <h3><span class="emoji">❓</span> 為什麼需要 ARP？</h3>
-                        <p>當一台電腦（例如 PC-A）想和另一台電腦（PC-B）通訊時，它知道 PC-B 的 IP 位址，但不知道它的 MAC 位址。在 Layer 2 網路中，資料幀的轉發是依賴 MAC 位址的，所以 PC-A 必須先取得 PC-B 的 MAC 位址。</p>
+                        <p>當一台電腦（例如 PC-A）想和另一台電腦（PC-B）通訊時，它知道 PC-B 的 IP 位址，但不知道它的 MAC 位址。在 Layer 2 網路中，資料Frame的轉發是依賴 MAC 位址的，所以 PC-A 必須先取得 PC-B 的 MAC 位址。</p>
                     </div>
                     <div class="intro-column">
                         <h3><span class="emoji">🔍</span> ARP 請求 (ARP Request)</h3>
@@ -52,7 +60,7 @@
                         <p>只有 IP 位址是 192.168.1.100 的那台電腦（PC-B）會回應一個「ARP 回應」，告訴 PC-A：「<strong>我就是 192.168.1.100，我的 MAC 位址是 XX:XX:XX:XX:XX:XX！</strong>」這個回應是單播給 PC-A 的。</p>
                     </div>
                 </div>
-                <p class="intro-summary">透過 ARP，設備就能將邏輯 IP 位址解析成實體 MAC 位址，從而實現 Layer 2 的資料幀轉發。設備會將這些解析結果儲存在自己的「ARP 快取表」中，以便下次快速查詢。</p>
+                <p class="intro-summary">透過 ARP，設備就能將邏輯 IP 位址解析成實體 MAC 位址，從而實現 Layer 2 的資料Frame轉發。設備會將這些解析結果儲存在自己的「ARP 快取表」中，以便下次快速查詢。</p>
             </div>
         </div>
     </div>

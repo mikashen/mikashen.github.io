@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality of Service (QoS) - L2 Switch解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>Quality of Service (QoS): 流量優先級管理，確保關鍵應用程式的效能</h1>
+            <p class="subtitle">了解如何透過 QoS 確保語音、視訊等關鍵流量的順暢傳輸，避免網路擁塞影響體驗</p>
+        </header>
+
+        <div id="qos-intro" class="content-section active">
+            <div class="vlan-intro-container">
+                <div class="vlan-intro-card card">
+                    <h2>QoS：網路流量的 VIP 通道</h2>
+                    <div class="intro-columns">
+                        <div class="intro-column">
+                            <h3><span class="emoji">🚦</span> 什麼是 QoS？</h3>
+                            <p><strong>Quality of Service (QoS)</strong> 是一種網路管理機制，旨在為不同類型的網路流量提供差異化的服務等級。想像一下機場的安檢通道：VIP 旅客可以走快速通道，而普通旅客則排隊等候。QoS 在網路中扮演類似的角色，確保關鍵應用程式（如語音通話、視訊會議）的流量能夠優先通行，即使在網路擁塞時也能保持良好的效能。</p>
+                        </div>
+                        <div class="intro_column">
+                            <h3><span class="emoji">🎯</span> 為什麼需要 QoS？</h3>
+                            <ul>
+                                <li><strong>確保關鍵應用效能：</strong>語音和視訊流量對延遲和抖動非常敏感，QoS 可以保證它們的即時性。</li>
+                                <li><strong>優化頻寬利用：</strong>在有限的頻寬下，QoS 可以合理分配資源，避免非關鍵流量佔用過多頻寬。</li>
+                                <li><strong>提升使用者體驗：</strong>減少網路延遲和丟包，讓使用者在進行線上會議、觀看高畫質影片時獲得更流暢的體驗。</li>
+                                <li><strong>管理網路擁塞：</strong>當網路流量過大時，QoS 可以根據預設的策略，丟棄或延遲低優先級的流量，保護高優先級流量的傳輸。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vlan-intro-card card">
+                    <h2>QoS 如何運作：多層次的流量管理</h2>
+                    <p>QoS 的實現通常涉及以下幾個關鍵步驟：</p>
+                    <ol>
+                        <li><strong>流量分類 (Classification)：</strong>識別不同類型的流量（例如：語音、視訊、網頁瀏覽、檔案下載）。</li>
+                        <li><strong>流量標記 (Marking)：</strong>為已分類的流量打上標記（例如：DSCP 值），以便網路設備識別其優先級。</li>
+                        <li><strong>擁塞管理 (Congestion Management)：</strong>當網路擁塞時，透過排隊機制（如優先級隊列、加權公平隊列）來決定封包的傳輸順序。</li>
+                        <li><strong>擁塞避免 (Congestion Avoidance)：</strong>在擁塞發生前，透過監控隊列長度並丟棄部分低優先級封包來避免網路完全癱瘓。</li>
+                        <li><strong>流量整形 (Traffic Shaping) 與流量策略 (Policing)：</strong>控制流量的發送速率，確保其符合預設的頻寬限制。</li>
+                    </ol>
+                    <div class="mermaid">
+                        graph TD
+                            A[原始流量] --> B{流量分類}
+                            B --> C1[語音流量]
+                            B --> C2[視訊流量]
+                            B --> C3[數據流量]
+
+                            C1 --> D{標記/排隊}
+                            C2 --> D
+                            C3 --> D
+
+                            D --> E[網路傳輸]
+                            E --> F[目標]
+                    </div>
+                    <p style="text-align:center; margin-top:10px;">QoS 透過分類、標記和排隊等機制，確保不同流量的服務品質。</p>
+                </div>
+
+                <div class="vlan-intro-card card animation-link-card">
+                    <h2><a href="qos_animation.html">🎬 前往動畫展示</a></h2>
+                    <p>點擊這裡，觀看 QoS 如何在網路擁塞時，優先處理高優先級流量，確保關鍵應用程式的順暢運行。</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+    <script src="mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+</body>
+</html>

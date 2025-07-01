@@ -115,18 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const allPcs = ['pc1', 'pc2', 'pc3', 'pc4'].map(key => advancedDevices[key]);
 
         // Step 1: PC1 sends to PC2 (unknown MAC) - Learning and Flooding
-        setAdvancedExplanation('1. PC-1 (Port 1) 傳送資料到 PC-2。交換器收到幀，學習來源 MAC (AA:..:10)。');
+        setAdvancedExplanation('1. PC-1 (Port 1) 傳送資料到 PC-2。Switch收到Frame，學習來源 MAC (AA:..:10)。');
         let packet = createAdvancedPacket('p1', 'data', source, dest);
         await moveAdvancedPacket(packet, source, l2switch);
         learnAdvancedMac(source);
         highlightMacTableRow(source.mac);
         await delay(2000);
 
-        setAdvancedExplanation('2. 交換器查詢 MAC 表，發現沒有 PC-2 (AA:..:20) 的紀錄。');
+        setAdvancedExplanation('2. Switch查詢 MAC 表，發現沒有 PC-2 (AA:..:20) 的紀錄。');
         unhighlightMacTableRows();
         await delay(2000);
 
-        setAdvancedExplanation('3. 交換器執行「廣播 (Flooding)」，將幀從除了來源 Port 1 以外的所有埠送出。');
+        setAdvancedExplanation('3. Switch執行「廣播 (Flooding)」，將Frame從除了來源 Port 1 以外的所有埠送出。');
         packet.remove(); // Remove original packet
         const floodPromises = allPcs.filter(pc => pc.name !== source.name).map(pc => {
             const clone = createAdvancedPacket('p_flood_' + pc.name, 'data', source, dest);
@@ -134,23 +134,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return moveAdvancedPacket(clone, l2switch, pc);
         });
         await Promise.all(floodPromises);
-        setAdvancedExplanation('4. 只有 PC-2 接收幀，其他 PC 丟棄。');
+        setAdvancedExplanation('4. 只有 PC-2 接收Frame，其他 PC 丟棄。');
         await delay(2000);
 
         // Step 5: PC2 replies to PC1 (now known MAC) - Learning and Unicast
-        setAdvancedExplanation('5. PC-2 (Port 2) 回應資料給 PC-1。交換器收到幀，學習來源 MAC (AA:..:20)。');
+        setAdvancedExplanation('5. PC-2 (Port 2) 回應資料給 PC-1。Switch收到Frame，學習來源 MAC (AA:..:20)。');
         packet = createAdvancedPacket('p2', 'data', dest, source);
         await moveAdvancedPacket(packet, dest, l2switch);
         learnAdvancedMac(dest);
         highlightMacTableRow(dest.mac);
         await delay(2000);
 
-        setAdvancedExplanation('6. 交換器查詢 MAC 表，找到 PC-1 (AA:..:10) 對應 Port 1。');
+        setAdvancedExplanation('6. Switch查詢 MAC 表，找到 PC-1 (AA:..:10) 對應 Port 1。');
         unhighlightMacTableRows();
         highlightMacTableRow(source.mac);
         await delay(2000);
 
-        setAdvancedExplanation('7. 交換器執行「單播 (Unicast)」，將幀精準地只從 Port 1 送出。');
+        setAdvancedExplanation('7. Switch執行「單播 (Unicast)」，將Frame精準地只從 Port 1 送出。');
         await moveAdvancedPacket(packet, l2switch, source);
         setAdvancedExplanation('8. PC-1 成功收到資料。ARL Table 運作演示完成。');
         unhighlightMacTableRows();
@@ -158,34 +158,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function runL2Flood({ from, to, switch: sw }) {
         const source = advancedDevices[from], dest = advancedDevices[to], l2switch = advancedDevices[sw];
-        setAdvancedExplanation('1. PC-1 準備傳送資料到 PC-2。它建立一個資料幀，包含目的 MAC (AA:..:20) 和來源 MAC (AA:..:10)。');
+        setAdvancedExplanation('1. PC-1 準備傳送資料到 PC-2。它建立一個資料Frame，包含目的 MAC (AA:..:20) 和來源 MAC (AA:..:10)。');
         const packet = createAdvancedPacket('p1', 'data', source, dest);
         await moveAdvancedPacket(packet, source, l2switch);
-        setAdvancedExplanation('2. 交換器收到來自 Port 1 的幀，學習來源 MAC 位址，將 `AA:..:10 -> Port 1` 寫入 MAC 表。');
+        setAdvancedExplanation('2. Switch收到來自 Port 1 的Frame，學習來源 MAC 位址，將 `AA:..:10 -> Port 1` 寫入 MAC 表。');
         learnAdvancedMac(source);
         await delay(2000);
-        setAdvancedExplanation('3. 交換器查詢 MAC 表，尋找目的 MAC (AA:..:20)。表中沒有紀錄。');
+        setAdvancedExplanation('3. Switch查詢 MAC 表，尋找目的 MAC (AA:..:20)。表中沒有紀錄。');
         await delay(2000);
-        setAdvancedExplanation('4. 由於找不到對應 Port，交換器執行「Flooding」，將幀從除了來源 Port 以外的所有 Port 送出。');
+        setAdvancedExplanation('4. 由於找不到對應 Port，Switch執行「Flooding」，將Frame從除了來源 Port 以外的所有 Port 送出。');
         packet.remove();
         const floodPacket1 = createAdvancedPacket('p2', 'data', source, dest, l2switch);
         await moveAdvancedPacket(floodPacket1, l2switch, dest);
-        setAdvancedExplanation('5. PC-2 收到幀，確認 MAC 位址相符，成功接收。動畫結束。');
+        setAdvancedExplanation('5. PC-2 收到Frame，確認 MAC 位址相符，成功接收。動畫結束。');
     }
 
     async function runL2Unicast({ from, to, switch: sw }) {
         const source = advancedDevices[from], dest = advancedDevices[to], l2switch = advancedDevices[sw];
-        setAdvancedExplanation('1. (前情提要: 交換器已學習過 PC-1 的 MAC) PC-2 準備回應資料給 PC-1。');
+        setAdvancedExplanation('1. (前情提要: Switch已學習過 PC-1 的 MAC) PC-2 準備回應資料給 PC-1。');
         await delay(2000);
-        setAdvancedExplanation('2. PC-2 建立資料幀 (目的 MAC: AA:..:10, 來源 MAC: AA:..:20) 並送往交換器。');
+        setAdvancedExplanation('2. PC-2 建立資料Frame (目的 MAC: AA:..:10, 來源 MAC: AA:..:20) 並送往Switch。');
         const packet = createAdvancedPacket('p1', 'data', source, dest);
         await moveAdvancedPacket(packet, source, l2switch);
-        setAdvancedExplanation('3. 交換器收到來自 Port 2 的幀，學習來源 MAC 位址 `AA:..:20 -> Port 2`。');
+        setAdvancedExplanation('3. Switch收到來自 Port 2 的Frame，學習來源 MAC 位址 `AA:..:20 -> Port 2`。');
         learnAdvancedMac(source);
         await delay(2000);
-        setAdvancedExplanation('4. 交換器查詢 MAC 表，找到目的 MAC (AA:..:10) 對應 Port 1。');
+        setAdvancedExplanation('4. Switch查詢 MAC 表，找到目的 MAC (AA:..:10) 對應 Port 1。');
         await delay(2000);
-        setAdvancedExplanation('5. 交換器執行「Unicast」，將幀精準地只從 Port 1 送出。');
+        setAdvancedExplanation('5. Switch執行「Unicast」，將Frame精準地只從 Port 1 送出。');
         await moveAdvancedPacket(packet, l2switch, dest);
         setAdvancedExplanation('6. PC-1 成功收到資料，通訊完成。');
     }
@@ -194,16 +194,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const source = advancedDevices[from], dest = advancedDevices[to], l3switch = advancedDevices[sw];
         setAdvancedExplanation('1. PC-1 (VLAN 10) 要傳送資料到 PC-4 (VLAN 20)。因為是跨網段，封包的目的 MAC 會是「預設閘道」的 MAC。');
         await delay(3000);
-        setAdvancedExplanation('2. 假設 PC-1 已知閘道 MAC，它將封包 (目的 IP: 192.168.2.40) 送到 L3 交換器。');
+        setAdvancedExplanation('2. 假設 PC-1 已知閘道 MAC，它將封包 (目的 IP: 192.168.2.40) 送到 L3 Switch。');
         const dataPacket = createAdvancedPacket('p_data', 'data', source, dest, { destMac: 'L3-SW-MAC' });
         await moveAdvancedPacket(dataPacket, source, l3switch);
         learnAdvancedMac(source);
-        setAdvancedExplanation('3. L3 交換器收到封包，檢查目的 IP (192.168.2.40)，判斷需路由到 VLAN 20。');
+        setAdvancedExplanation('3. L3 Switch收到封包，檢查目的 IP (192.168.2.40)，判斷需路由到 VLAN 20。');
         await delay(2500);
-        setAdvancedExplanation('4. 交換器查詢 ARP 表，尋找 192.168.2.40 的 MAC 位址。發現沒有紀錄。');
+        setAdvancedExplanation('4. Switch查詢 ARP 表，尋找 192.168.2.40 的 MAC 位址。發現沒有紀錄。');
         dataPacket.style.opacity = 0.5;
         await delay(2500);
-        setAdvancedExplanation('5. L3 交換器在 VLAN 20 內廣播「ARP 請求」：誰是 192.168.2.40？');
+        setAdvancedExplanation('5. L3 Switch在 VLAN 20 內廣播「ARP 請求」：誰是 192.168.2.40？');
         const arpRequest = createAdvancedPacket('p_arp_req', 'arp', l3switch, { name: 'Broadcast' }, { type: 'Request', targetIp: dest.ip });
         const floodTargets = advancedScenarios.l3_arp.devices.filter(d => advancedDevices[d].vlan === 20 && d !== 'l3switch');
         const promises = floodTargets.map(targetKey => {
@@ -215,10 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setAdvancedExplanation('6. PC-4 收到 ARP 請求，以「ARP 回應」單播回覆自己的 MAC 位址 (BB:..:40)。');
         const arpReply = createAdvancedPacket('p_arp_rep', 'arp', dest, l3switch, { type: 'Reply', sourceMac: dest.mac, sourceIp: dest.ip });
         await moveAdvancedPacket(arpReply, dest, l3switch);
-        setAdvancedExplanation('7. L3 交換器收到 ARP 回應，將 `192.168.2.40 -> BB:..:40` 寫入 ARP 表。');
+        setAdvancedExplanation('7. L3 Switch收到 ARP 回應，將 `192.168.2.40 -> BB:..:40` 寫入 ARP 表。');
         learnAdvancedArp(dest.ip, dest.mac);
         await delay(2000);
-        setAdvancedExplanation('8. 現在可以傳送原始資料了。交換器重寫幀的 MAC (來源:L3-SW, 目的:PC-4) 並送出。');
+        setAdvancedExplanation('8. 現在可以傳送原始資料了。Switch重寫Frame的 MAC (來源:L3-SW, 目的:PC-4) 並送出。');
         dataPacket.style.opacity = 1;
         updateAdvancedPacketInfo(dataPacket, { srcMac: 'L3-SW-MAC', destMac: dest.mac });
         await moveAdvancedPacket(dataPacket, l3switch, dest);

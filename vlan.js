@@ -99,18 +99,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function runVlanBroadcast({ from, to, switch: sw }) {
         const source = vlanDevices[from], dest = vlanDevices[to], vlanSwitch = vlanDevices[sw];
-        setVlanExplanation('1. PC-A (VLAN 10) 準備傳送資料到 PC-B (VLAN 10)。它建立一個資料幀。');
+        setVlanExplanation('1. PC-A (VLAN 10) 準備傳送資料到 PC-B (VLAN 10)。它建立一個資料Frame。');
         const packet = createVlanPacket('p_vlan_1', 'data', source, dest);
         await moveVlanPacket(packet, source, vlanSwitch);
 
-        setVlanExplanation('2. 交換器收到來自 Port 1 的幀，學習來源 MAC (PC-A)，並記錄其 VLAN (VLAN 10)。');
+        setVlanExplanation('2. Switch收到來自 Port 1 的Frame，學習來源 MAC (PC-A)，並記錄其 VLAN (VLAN 10)。');
         learnVlanMac(source);
         await delay(2000);
 
-        setVlanExplanation('3. 交換器查詢 MAC 表，尋找目的 MAC (PC-B)。表中沒有紀錄。');
+        setVlanExplanation('3. Switch查詢 MAC 表，尋找目的 MAC (PC-B)。表中沒有紀錄。');
         await delay(2000);
 
-        setVlanExplanation('4. 交換器執行「廣播」，但只會將幀從屬於 VLAN 10 的 Port 送出。');
+        setVlanExplanation('4. Switch執行「廣播」，但只會將Frame從屬於 VLAN 10 的 Port 送出。');
         packet.remove();
         const floodTargets = vlanScenarios.vlan_broadcast.devices.filter(d => vlanDevices[d].vlan === source.vlan && d !== from && vlanDevices[d].type !== 'switch');
         const promises = floodTargets.map(targetKey => {
@@ -119,23 +119,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         await Promise.all(promises);
 
-        setVlanExplanation('5. PC-B 收到幀，確認 MAC 位址相符，成功接收。PC-C 和 PC-D (VLAN 20) 不會收到此廣播。VLAN 成功隔離了廣播域。');
+        setVlanExplanation('5. PC-B 收到Frame，確認 MAC 位址相符，成功接收。PC-C 和 PC-D (VLAN 20) 不會收到此廣播。VLAN 成功隔離了廣播域。');
     }
 
     async function runVlanInterVlan({ from, to, switch: sw }) {
         const source = vlanDevices[from], dest = vlanDevices[to], vlanSwitch = vlanDevices[sw];
-        setVlanExplanation('1. PC-A (VLAN 10) 嘗試傳送資料到 PC-C (VLAN 20)。它建立一個資料幀。');
+        setVlanExplanation('1. PC-A (VLAN 10) 嘗試傳送資料到 PC-C (VLAN 20)。它建立一個資料Frame。');
         const packet = createVlanPacket('p_vlan_inter', 'data', source, dest);
         await moveVlanPacket(packet, source, vlanSwitch);
 
-        setVlanExplanation('2. 交換器收到來自 Port 1 的幀，學習來源 MAC (PC-A)，並記錄其 VLAN (VLAN 10)。');
+        setVlanExplanation('2. Switch收到來自 Port 1 的Frame，學習來源 MAC (PC-A)，並記錄其 VLAN (VLAN 10)。');
         learnVlanMac(source);
         await delay(2000);
 
-        setVlanExplanation('3. 交換器查詢 MAC 表，尋找目的 MAC (PC-C)。表中沒有紀錄。');
+        setVlanExplanation('3. Switch查詢 MAC 表，尋找目的 MAC (PC-C)。表中沒有紀錄。');
         await delay(2000);
 
-        setVlanExplanation('4. 交換器嘗試廣播尋找 PC-C，但 PC-C 屬於 VLAN 20。交換器不會將屬於 VLAN 10 的廣播幀轉發到 VLAN 20。');
+        setVlanExplanation('4. Switch嘗試廣播尋找 PC-C，但 PC-C 屬於 VLAN 20。Switch不會將屬於 VLAN 10 的廣播Frame轉發到 VLAN 20。');
         packet.remove(); // Remove original packet
         const floodTargets = vlanScenarios.vlan_inter_vlan.devices.filter(d => vlanDevices[d].vlan === source.vlan && d !== from && vlanDevices[d].type !== 'switch');
         const promises = floodTargets.map(targetKey => {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         await Promise.all(promises);
 
-        setVlanExplanation('5. PC-C 不會收到此幀。PC-A 無法直接與 PC-C 通訊。這證明了 VLAN 之間的隔離性。L2 交換器無法在不同 VLAN 間轉發資料。若要實現跨 VLAN 通訊，必須透過具備路由功能的 Layer 3 設備（如 L3 交換器或路由器）進行。');
+        setVlanExplanation('5. PC-C 不會收到此Frame。PC-A 無法直接與 PC-C 通訊。這證明了 VLAN 之間的隔離性。L2 Switch無法在不同 VLAN 間轉發資料。若要實現跨 VLAN 通訊，必須透過具備路由功能的 Layer 3 設備（如 L3 Switch或路由器）進行。');
     }
 
     // --- VLAN Animation Helpers ---

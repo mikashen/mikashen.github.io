@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L2 交換器基礎入門</title>
+    <title>L2 Switch基礎入門</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -15,19 +15,26 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
             </ul>
         </nav>
     </div>
     <div class="main-content-wrapper">
     <header>
-        <h1>L2 交換器基礎入門：網路世界的聰明郵差</h1>
+        <h1>L2 Switch基礎入門：網路世界的聰明郵差</h1>
         <p class="subtitle">深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</p>
     </header>
 
@@ -36,12 +43,12 @@
     <div id="l2-intro" class="content-section active">
         <div class="intro-container">
             <div class="intro-card card">
-                <h2>L2 交換器基礎入門：網路世界的聰明郵差</h2>
-                <p>在我們開始玩動畫之前，讓我們先來認識一下主角：<strong>Layer 2 交換器</strong>。把它想像成一個辦公室裡新來的、但學習能力超強的郵差。</p>
+                <h2>L2 Switch基礎入門：網路世界的聰明郵差</h2>
+                <p>在我們開始玩動畫之前，讓我們先來認識一下主角：<strong>Layer 2 Switch</strong>。把它想像成一個辦公室裡新來的、但學習能力超強的郵差。</p>
                 <div class="intro-columns">
                     <div class="intro-column">
                         <h3><span class="emoji">🎓</span> 1. 學習 (Learning)</h3>
-                        <p>郵差剛來時，不知道每個員工坐在哪個座位（Port）。當他收到第一封信（例如，從 <strong>Port 1</strong> 來的信），他會偷看一下寄件人是誰（來源 MAC 位址），然後在筆記本中記錄下來：「<strong>喔！某某某 (MAC) 在 Port 1 啊！</strong>」這就是「學習」。這個筆記本就是交換器的「<strong>MAC 位址表 (又稱 ARL - Address Resolution List)</strong>」。</p>
+                        <p>郵差剛來時，不知道每個員工坐在哪個座位（Port）。當他收到第一封信（例如，從 <strong>Port 1</strong> 來的信），他會偷看一下寄件人是誰（來源 MAC 位址），然後在筆記本中記錄下來：「<strong>喔！某某某 (MAC) 在 Port 1 啊！</strong>」這就是「學習」。這個筆記本就是Switch的「<strong>MAC 位址表 (又稱 ARL - Address Resolution List)</strong>」。</p>
                     </div>
                     <div class="intro-column">
                         <h3><span class="emoji">📢</span> 2. 廣播 (Flooding)</h3>
@@ -52,7 +59,8 @@
                         <p>經過幾次派送後，郵差的筆記本越來越完整。當他再次收到要給某位員工的信時，他只需查一下筆記本：「<strong>找到了！他在 Port 5！</strong>」然後他會安靜地、精準地把信只送到 Port 5。這個高效率的點對點派送，就是「轉發」。</p>
                     </div>
                 </div>
-                <p class="intro-summary">接下來的動畫，你將會親眼看到交換器如何執行這三個核心動作。請特別留意「MAC Address Table」是如何在動畫過程中被動態建立起來的。</p>
+                <p class="intro-summary">接下來的動畫，你將會親眼看到Switch如何執行這三個核心動作。請特別留意「MAC Address Table」是如何在動畫過程中被動態建立起來的。</p>
+                <p class="intro-summary"><a href="advanced_animation.html">點擊這裡觀看 L2/L3 進階動畫</a></p>
             </div>
         </div>
     </div>

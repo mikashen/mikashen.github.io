@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function runUnicast({ from, to, switch: sw }) {
         const source = umbDevices[from], dest = umbDevices[to], umbSwitch = umbDevices[sw];
-        setUmbExplanation('1. PC-1 傳送一個單播封包給 PC-3。交換器查詢 MAC 表，找到 PC-3 對應的埠。');
+        setUmbExplanation('1. PC-1 傳送一個單播封包給 PC-3。Switch查詢 MAC 表，找到 PC-3 對應的埠。');
         const packet = createUmbPacket('umb_p1', 'data', source, dest);
         await moveUmbPacket(packet, source, umbSwitch);
         await delay(1000);
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await moveUmbPacket(packet, source, umbSwitch);
         await delay(1000);
 
-        setUmbExplanation('2. 交換器將多播封包轉發給所有加入該多播組的成員 (PC-2 和 PC-4)。');
+        setUmbExplanation('2. Switch將多播封包轉發給所有加入該多播組的成員 (PC-2 和 PC-4)。');
         packet.remove();
         const promises = multicastGroup.map(memberKey => {
             const member = umbDevices[memberKey];
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await moveUmbPacket(packet, source, umbSwitch);
         await delay(1000);
 
-        setUmbExplanation('2. 交換器將廣播封包從除了來源埠以外的所有埠送出。');
+        setUmbExplanation('2. Switch將廣播封包從除了來源埠以外的所有埠送出。');
         packet.remove();
         const allPcs = ['umb_pc1', 'umb_pc2', 'umb_pc3', 'umb_pc4'].map(key => umbDevices[key]);
         const floodTargets = allPcs.filter(pc => pc.name !== source.name);
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return moveUmbPacket(clone, umbSwitch, pc);
         });
         await Promise.all(promises);
-        setUmbExplanation('3. 所有連接到交換器的設備都接收到廣播封包。廣播完成。');
+        setUmbExplanation('3. 所有連接到Switch的設備都接收到廣播封包。廣播完成。');
     }
 
     // --- Unicast/Multicast/Broadcast Animation Helpers ---

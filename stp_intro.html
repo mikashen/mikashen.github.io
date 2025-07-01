@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanning Tree Protocol (STP) - L2 Switch Explained</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>Spanning Tree Protocol (STP)：智慧防禦，打造無迴圈的穩定網路</h1>
+            <p class="subtitle">深入了解 STP 如何選舉根橋、指定連接埠，並阻斷備援路徑以防止網路風暴</p>
+        </header>
+
+        <div id="stp-intro" class="content-section active">
+            <div class="vlan-intro-container">
+                <div class="vlan-intro-card card">
+                    <h2>STP：網路的交通警察</h2>
+                    <div class="intro-columns">
+                        <div class="intro-column">
+                            <h3><span class="emoji">🌳</span> 什麼是 STP？</h3>
+                            <p><strong>Spanning Tree Protocol (STP)</strong> 是一種網路協定，如同網路世界的交通警察。它的核心任務是在具備多條備援路徑的交換網路中，智慧地建立一個無迴圈的「樹狀」拓撲結構。</p>
+                        </div>
+                        <div class="intro-column">
+                            <h3><span class="emoji">🌪️</span> 為什麼需要 STP？</h3>
+                            <ul>
+                                <li><strong>防止廣播風暴：</strong>沒有 STP，一個廣播封包會在迴圈中永無止盡地複製和傳遞，迅速耗盡所有網路頻寬。</li>
+                                <li><strong>避免 MAC 表不穩定：</strong>迴圈會讓Switch從不同埠學到同一個 MAC 位址，導致 MAC 表不斷錯誤更新，無法正常轉發資料。</li>
+                                <li><strong>提供路徑備援：</strong>STP 在阻斷備援路徑的同時，也持續監控它們。一旦主要路徑失效，STP 會立即啟用一條備援路徑，確保網路連線不中斷。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vlan-intro-card card">
+                    <h2>STP 如何運作：選舉與阻斷的藝術</h2>
+                    <p>STP 的運作基於一套嚴謹的選舉流程，以確保網路中只有一條通往任何目的地的最佳路徑處於活動狀態：</p>
+                    <ol>
+                        <li><strong>選舉根橋 (Root Bridge)：</strong>網路中的所有Switch透過交換 BPDU (橋接協定資料單元) 來選舉出一個「根橋」，它將成為整個 STP 拓撲的邏輯中心。</li>
+                        <li><strong>確定根埠 (Root Port)：</strong>在非根橋的Switch上，離根橋路徑成本最低的埠會被選為「根埠」，這是通往根橋的最佳路徑。</li>
+                        <li><strong>確定指定埠 (Designated Port)：</strong>在每一個網段上，離根橋最近的Switch上的埠會被選為「指定埠」，負責該網段的流量轉發。</li>
+                        <li><strong>阻斷備援埠 (Blocking Port)：</strong>所有既不是根埠也不是指定埠的埠，都會被置於「阻斷」狀態。這些埠不會轉發資料，從而有效地打破了網路迴圈。</li>
+                    </ol>
+                    <div class="mermaid">
+                        graph TD
+                            subgraph "有迴圈的網路"
+                                A(Switch A) ---|P1| B(Switch B)
+                                B ---|P1| C(Switch C)
+                                C ---|P1| A
+                            end
+
+                            subgraph "STP 啟用後的無迴圈拓撲"
+                                A_STP[Switch A - Root]
+                                B_STP[Switch B]
+                                C_STP[Switch C]
+
+                                A_STP ---|DP| B_STP
+                                B_STP ---|RP| A_STP
+                                A_STP ---|DP| C_STP
+                                C_STP ---|RP| A_STP
+                                B_STP ---|DP| C_STP
+                                C_STP -.->|Blocked| B_STP
+                            end
+                    </div>
+                    <p style="text-align:center; margin-top:10px;">RP = Root Port, DP = Designated Port</p>
+                </div>
+
+                <div class="vlan-intro-card card animation-link-card">
+                    <h2><a href="stp_animation.html">🎬 前往動畫展示</a></h2>
+                    <p>文字說明不夠清楚？點擊這裡，觀看 STP 如何透過 BPDU 交換，動態地建立一個無迴圈的網路拓撲。</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+    <script src="mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+</body>
+</html>

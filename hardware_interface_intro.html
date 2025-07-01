@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>交換器硬體介面介紹</title>
+    <title>Switch硬體介面介紹</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -15,30 +15,38 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
             </ul>
         </nav>
     </div>
     <div class="main-content-wrapper">
         <header>
-            <h1>交換器硬體介面介紹：連接世界的端口</h1>
+            <h1>Switch硬體介面介紹：連接世界的端口</h1>
             <p class="subtitle">深入了解銅纜、光纖接口、速度與模組類型</p>
         </header>
 
         <div class="content-section active">
             <div class="intro-container">
                 <div class="intro-card card">
-                    <h2>網路交換器的物理連接</h2>
-                    <p>網路交換器是資料中心和企業網路的核心，其性能和靈活性很大程度上取決於其提供的硬體介面。這些介面決定了資料傳輸的速度、距離以及所使用的纜線類型。</p>
+                    <h2>網路Switch的物理連接</h2>
+                    <p>網路Switch是資料中心和企業網路的核心，其性能和靈活性很大程度上取決於其提供的硬體介面。這些介面決定了資料傳輸的速度、距離以及所使用的纜線類型。</p>
 
                     <h3><span class="emoji">🔌</span> 銅纜接口 (Copper Interfaces)</h3>
-                    <p>銅纜接口是最常見的網路連接類型，主要用於短距離連接，例如伺服器、工作站到交換器。它們通常使用 RJ45 連接器。</p>
+                    <p>銅纜接口是最常見的網路連接類型，主要用於短距離連接，例如伺服器、工作站到Switch。它們通常使用 RJ45 連接器。</p>
                     <ul>
                         <li><strong>10/100/1000BASE-T (Gigabit Ethernet)</strong>: 最普遍的乙太網路標準，支援 10 Mbps, 100 Mbps, 1 Gbps 的速度。使用 Cat5e 或 Cat6 纜線。</li>
                         <li><strong>2.5GBASE-T / 5GBASE-T (Multi-Gigabit Ethernet)</strong>: 為了支援更快的無線網路 (如 Wi-Fi 6) 而生，可在現有 Cat5e/Cat6 纜線上提供 2.5 Gbps 或 5 Gbps 的速度。</li>
@@ -53,7 +61,7 @@
                                 <li><strong>1G (Gigabit Ethernet)</strong>: 1000BASE-SX (多模光纖, 短距離), 1000BASE-LX (單模光纖, 長距離)。</li>
                                 <li><strong>10G (10 Gigabit Ethernet)</strong>: 10GBASE-SR (多模光纖, 短距離), 10GBASE-LR (單模光纖, 長距離)。</li>
                                 <li><strong>25G (25 Gigabit Ethernet)</strong>: 25GBASE-SR (多模光纖), 25GBASE-LR (單模光纖)。通常用於伺服器連接，提供更高的頻寬密度。</li>
-                                <li><strong>40G (40 Gigabit Ethernet)</strong>: 40GBASE-SR4 (多模光纖), 40GBASE-LR4 (單模光纖)。常用於交換器間的互連。</li>
+                                <li><strong>40G (40 Gigabit Ethernet)</strong>: 40GBASE-SR4 (多模光纖), 40GBASE-LR4 (單模光纖)。常用於Switch間的互連。</li>
                                 <li><strong>50G (50 Gigabit Ethernet)</strong>: 50GBASE-SR (多模光纖), 50GBASE-LR (單模光纖)。</li>
                                 <li><strong>100G (100 Gigabit Ethernet)</strong>: 100GBASE-SR4/SR10 (多模光纖), 100GBASE-LR4/ER4 (單模光纖)。資料中心主流骨幹速度。</li>
                                 <li><strong>200G (200 Gigabit Ethernet)</strong>: 200GBASE-SR4/SR8 (多模光纖), 200GBASE-LR4 (單模光纖)。</li>

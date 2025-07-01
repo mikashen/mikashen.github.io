@@ -15,13 +15,21 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
             </ul>
         </nav>
     </div>
@@ -37,7 +45,7 @@
         <div class="intro-container">
             <div class="intro-card card">
                 <h2>Flow Control (流量控制)：確保資料不丟失的關鍵機制</h2>
-                <p>在高速網路中，資料傳輸的速度差異和突發流量是常見的挑戰。如果發送端持續以高速發送資料，而接收端或中間設備（如交換器）的處理能力或緩衝區不足，就可能導致資料丟失。<strong>流量控制 (Flow Control)</strong> 是一種機制，用於協調發送端和接收端之間的資料傳輸速率，以防止接收端因過載而丟棄資料。</p>
+                <p>在高速網路中，資料傳輸的速度差異和突發流量是常見的挑戰。如果發送端持續以高速發送資料，而接收端或中間設備（如Switch）的處理能力或緩衝區不足，就可能導致資料丟失。<strong>流量控制 (Flow Control)</strong> 是一種機制，用於協調發送端和接收端之間的資料傳輸速率，以防止接收端因過載而丟棄資料。</p>
                 <div class="intro-columns">
                     <div class="intro-column">
                         <h3><span class="emoji">🚦</span> 為什麼需要流量控制？</h3>
@@ -49,10 +57,10 @@
                         </ul>
                     </div>
                     <div class="intro-column">
-                        <h3><span class="emoji">⏸️</span> Pause Frame (暫停幀)</h3>
-                        <p>在乙太網路中，最常見的流量控制機制是使用 <strong>Pause Frame (暫停幀)</strong>，這是一種 IEEE 802.3x 標準定義的特殊控制幀。它的工作原理如下：</p>
+                        <h3><span class="emoji">⏸️</span> Pause Frame (暫停Frame)</h3>
+                        <p>在乙太網路中，最常見的流量控制機制是使用 <strong>Pause Frame (暫停Frame)</strong>，這是一種 IEEE 802.3x 標準定義的特殊控制Frame。它的工作原理如下：</p>
                         <ol>
-                            <li>當一個設備（例如交換器或伺服器）的接收緩衝區達到預設的「高水位線」時，表示它快要滿了。</li>
+                            <li>當一個設備（例如Switch或伺服器）的接收緩衝區達到預設的「高水位線」時，表示它快要滿了。</li>
                             <li>該設備會向其連接的對端設備發送一個 Pause Frame。</li>
                             <li>Pause Frame 中包含一個「暫停時間」值，告訴對端設備需要暫停發送資料多久。</li>
                             <li>對端設備收到 Pause Frame 後，會暫停向該埠發送資料，直到暫停時間結束，或者接收端發送一個「解除暫停」的 Pause Frame (暫停時間為 0)。</li>
@@ -70,33 +78,34 @@
                         <p>儘管有這些限制，Pause Frame 仍然是乙太網路中防止緩衝區溢出和資料丟失的重要工具，尤其是在資料中心等高速環境中。</p>
                     </div>
                 </div>
-                <p class="intro-summary">接下來的動畫將展示當接收端緩衝區滿載時，交換器如何利用 Pause Frame 來控制流量，避免資料丟失。</p>
+                <p class="intro-summary">接下來的動畫將展示當接收端緩衝區滿載時，Switch如何利用 Pause Frame 來控制流量，避免資料丟失。</p>
             </div>
         </div>
     </div>
 
     <div id="flow-control-animation" class="content-section active">
         <div class="container">
-        <div class="animation-content-area">
-            <div class="simulation-wrapper">
-                <div id="flow-control-animation-canvas" class="animation-canvas">
-                    <svg id="flow-control-topology-svg" width="100%" height="100%"></svg>
-                </div>
-                <div class="info-tables-wrapper">
-                    <!-- No specific tables for Flow Control animation, but keeping the structure -->
-                </div>
-            </div>
-            <div class="controls-explanation-wrapper">
-                <div class="controls card">
-                    <h2>Flow Control 動畫控制器</h2>
-                    <div class="control-group">
-                        <button id="start-flow-control-btn">開始動畫</button>
-                        <button id="reset-flow-control-btn">重設</button>
+            <div class="animation-content-area">
+                <div class="simulation-wrapper">
+                    <div id="flow-control-animation-canvas" class="animation-canvas">
+                        <svg id="flow-control-topology-svg" width="100%" height="100%"></svg>
+                    </div>
+                    <div class="info-tables-wrapper">
+                        <!-- No specific tables for Flow Control animation, but keeping the structure -->
                     </div>
                 </div>
-                <div id="flow-control-explanation" class="card">
-                    <h2>運作解說</h2>
-                    <p id="flow-control-explanation-text">點擊「開始動畫」來觀察流量控制的運作。</p>
+                <div class="controls-explanation-wrapper">
+                    <div class="controls card">
+                        <h2>Flow Control 動畫控制器</h2>
+                        <div class="control-group">
+                            <button id="start-flow-control-btn">開始動畫</button>
+                            <button id="reset-flow-control-btn">重設</button>
+                        </div>
+                    </div>
+                    <div id="flow-control-explanation" class="card">
+                        <h2>運作解說</h2>
+                        <p id="flow-control-explanation-text">點擊「開始動畫」來觀察流量控制的運作。</p>
+                    </div>
                 </div>
             </div>
         </div>

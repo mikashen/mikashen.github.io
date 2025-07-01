@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>網路Switch互動式學習平台</title>
+    <title>Ingress/Egress 動畫 - L2 Switch解說</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>網路Switch互動式學習平台</h1>
-        <p class="subtitle">深入探索網路Switch核心概念與運作原理</p>
-    </header>
-
-    <nav class="main-nav">
-        <ul>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
                 <li><a href="index.html">返回主頁</a></li>
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
@@ -33,26 +29,29 @@
                 
                 <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
                 <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
-                
-        </ul>
-    </nav>
-
-    <div class="container">
-        <div class="intro-card card">
-            <h2>歡迎來到網路Switch互動式學習平台！</h2>
-            <p>本平台提供一系列關於網路Switch核心概念的互動式解說與動畫演示。</p>
-            <p>您可以透過左側導航列探索以下主題：</p>
-            <ul>
-                <li><strong>硬體基礎：</strong>Switch硬體架構與介面介紹。</li>
-                <li><strong>資料流動：</strong>Ingress/Egress、L2 Switch基礎 (MAC 學習、廣播、單播)、ARP、單播/多播/廣播、MMU 與 Flow Control。</li>
-                <li><strong>進階功能：</strong>VLAN、STP、LAG、QoS、Jumbo Frames 與Switch管理。</li>
             </ul>
-            <p>每個主題都包含詳細的文字說明與生動的動畫演示，幫助您更直觀、深入地理解複雜的網路運作原理。</p>
-        </div>
+        </nav>
     </div>
-
-    <footer>
-        <p>Mika Shen製作</p>
-    </footer>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>Ingress/Egress 動畫展示</h1>
+        </header>
+        <main>
+            <canvas id="ingressEgressCanvas" width="800" height="600"></canvas>
+            <div id="controls">
+                <button id="startBtn">開始動畫</button>
+                <button id="resetBtn">重設</button>
+            </div>
+            <div id="explanation">
+                <p>此動畫展示資料包在Switch中的 Ingress 和 Egress 過程。</p>
+                <p id="step-explanation"></p>
+            </div>
+        </main>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="ingress_egress.js"></script>
 </body>
 </html>

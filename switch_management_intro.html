@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Management (Switch管理) 介紹</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+    <header>
+        <h1>Switch Management (Switch管理)：多種介面，靈活掌控網路設備</h1>
+        <p class="subtitle">深入探索 CLI、Web 介面、SNMP 等管理方式</p>
+    </header>
+
+    
+
+    <div id="switch-management-intro" class="content-section active">
+        <div class="intro-container">
+            <div class="intro-card card">
+                <h2>Switch Management (Switch管理)：掌控網路的關鍵</h2>
+                <p>網路Switch是網路基礎設施的核心，對其進行有效的管理是確保網路穩定、安全和高效運行的關鍵。Switch管理涉及配置設備、監控性能、排查故障以及更新軟體等多方面工作。為了實現這些目標，Switch提供了多種管理介面和協定。</p>
+                <div class="intro-columns">
+                    <div class="intro-column">
+                        <h3><span class="emoji">💻</span> 1. CLI (Command Line Interface)</h3>
+                        <p>CLI 是最傳統也是功能最強大的管理方式。透過串列埠 (Console Port) 或遠端連線 (如 Telnet, SSH)，管理員可以直接輸入命令來配置Switch的各項功能。CLI 提供了對設備最細緻的控制，是高級配置和故障排除的首選。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">🌐</span> 2. Web 介面 (Web-based Interface)</h3>
+                        <p>許多現代Switch都提供了基於網頁的圖形使用者介面 (GUI)。透過瀏覽器訪問Switch的 IP 位址，管理員可以透過直觀的圖形介面進行配置和監控。Web 介面通常更易於使用，適合日常管理和非專業使用者。</p>
+                    </div>
+                    <div class="intro-column">
+                        <h3><span class="emoji">📊</span> 3. SNMP (Simple Network Management Protocol)</h3>
+                        <p>SNMP 是一種標準的網路管理協定，用於在網路設備之間交換管理資訊。透過 SNMP，網路管理系統 (NMS) 可以遠端監控Switch的狀態、性能指標（如流量、錯誤率）以及接收設備發出的告警 (Trap)。SNMP 實現了自動化監控和大規模網路管理。</p>
+                    </div>
+                </div>
+                <p class="intro-summary">除了上述三種主要方式，還有其他管理協定和工具，例如：</p>
+                <ul>
+                    <li><strong>RMON (Remote Monitoring)</strong>: 擴展了 SNMP 的功能，提供更詳細的網路流量統計和監控。</li>
+                    <li><strong>NetFlow/sFlow</strong>: 用於收集網路流量的詳細資訊，以便進行流量分析和計費。</li>
+                    <li><strong>Syslog</strong>: 用於收集設備日誌，便於集中管理和故障排查。</li>
+                </ul>
+                <p class="intro-summary">選擇哪種管理方式取決於管理員的需求、技能水平以及網路的規模和複雜性。通常，在實際工作中會結合使用多種管理方式以達到最佳效果。</p>
+                <p class="intro-summary"><a href="switch_management_animation.html">點擊這裡觀看 Switch Management 動畫</a></p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <footer>
+        <p>Mika Shen製作</p>
+    </footer>
+</body>
+</html>

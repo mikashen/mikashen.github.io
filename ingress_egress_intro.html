@@ -15,13 +15,21 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
             </ul>
         </nav>
     </div>
@@ -37,7 +45,7 @@
         <div class="intro-container">
             <div class="intro-card card">
                 <h2>Packet Ingress / Egress：資料包的進出視角</h2>
-                <p>在網路設備（如交換器、路由器）中，我們經常會聽到「Ingress」和「Egress」這兩個詞。它們描述的是資料包進出設備的「方向」和「視角」。理解這兩個概念對於分析網路流量、配置安全策略或排查問題都非常重要。</p>
+                <p>在網路設備（如Switch、路由器）中，我們經常會聽到「Ingress」和「Egress」這兩個詞。它們描述的是資料包進出設備的「方向」和「視角」。理解這兩個概念對於分析網路流量、配置安全策略或排查問題都非常重要。</p>
                 <div class="intro-columns">
                     <div class="intro-column">
                         <h3><span class="emoji">➡️</span> Ingress (進入)</h3>
@@ -46,7 +54,7 @@
                             <li>檢查資料包的完整性。</li>
                             <li>應用輸入方向的訪問控制列表 (ACL)。</li>
                             <li>進行 QoS (服務品質) 分類和標記。</li>
-                            <li>學習來源 MAC 位址 (對於交換器)。</li>
+                            <li>學習來源 MAC 位址 (對於Switch)。</li>
                         </ul>
                         <p>想像一下，你是一個海關官員，正在檢查進入國境的旅客。你的視角就是 Ingress。</p>
                     </div>
@@ -63,6 +71,7 @@
                     </div>
                 </div>
                 <p class="intro-summary">總之，Ingress 和 Egress 總是相對於「網路設備本身」而言的。一個資料包從 Ingress 埠進入設備，經過內部處理後，從 Egress 埠離開設備。</p>
+                <p class="intro-summary"><a href="ingress_egress_animation.html">點擊這裡觀看 Ingress/Egress 動畫</a></p>
             </div>
         </div>
     </div>

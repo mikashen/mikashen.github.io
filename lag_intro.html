@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Aggregation (LAG) - L2 Switch解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
+				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
+                <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
+                <li><a href="arp_intro.html">ARP 觀念解說</a></li>
+				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
+                <li><a href="flow_control_animation.html">Flow Control</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>Link Aggregation (LAG): 聚合之力，打造高速且可靠的網路通道</h1>
+            <p class="subtitle">探索如何將多條實體鏈路捆綁成一條邏輯通道，實現頻寬倍增與無縫備援</p>
+        </header>
+
+        <div id="lag-intro" class="content-section active">
+            <div class="vlan-intro-container">
+                <div class="vlan-intro-card card">
+                    <h2>LAG：網路世界的多線道高速公路</h2>
+                    <div class="intro-columns">
+                        <div class="intro-column">
+                            <h3><span class="emoji">🛣️</span> 什麼是 Link Aggregation？</h3>
+                            <p><strong>Link Aggregation (LAG)</strong>，也常被稱為 EtherChannel 或 Port Trunking，是一種將多個獨立的實體網路連結（例如乙太網路埠）「捆綁」在一起，形成一個單一、高速的邏輯通道的技術。您可以想像成將數條鄉間小路拓寬、合併成一條多線道的高速公路。</p>
+                        </div>
+                        <div class="intro-column">
+                            <h3><span class="emoji">🚀</span> 為什麼需要 LAG？</h3>
+                            <ul>
+                                <li><strong>倍增頻寬：</strong>邏輯通道的總頻寬等於所有實體連結頻寬的總和。捆綁 3 條 1Gbps 的連結，您就能得到一條 3Gbps 的高速通道。</li>
+                                <li><strong>提升可靠性 (備援)：</strong>如果捆綁群組中的某一條實體連結意外中斷，網路流量會自動且無縫地由其餘健康的連結接手處理，確保連線不中斷。</li>
+                                <li><strong>負載平衡：</strong>LAG 會根據設定的演算法，智慧地將網路流量分散到群組中的所有實體連結上，避免單一連結過載，提升整體傳輸效率。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vlan-intro-card card">
+                    <h2>LAG 如何運作：LACP 的自動協商</h2>
+                    <p>在實務上，最常用來建立 LAG 的是 <strong>LACP (Link Aggregation Control Protocol)</strong>。LACP 允許Switch之間自動協商、建立並維護這個捆綁通道。兩端的設備會互相發送 LACPDU 封包，以確認彼此的狀態、監控連結的健康狀況，並動態地管理這個聚合群組。</p>
+                    <div class="mermaid">
+                        graph TD
+                            subgraph "LAG 之前"
+                                A(Switch A) --> B(Switch B)
+                                A -.-> B
+                                A -.-> B
+                            end
+
+                            subgraph "LAG 之後"
+                                A_LAG(Switch A) === B_LAG(Switch B)
+                            end
+                    </div>
+                    <p style="text-align:center; margin-top:10px;">在 LAG 之前，鏈路 1 是啟用狀態，鏈路 2 和鏈路 3 因 STP 而被阻斷。LAG 之後，所有鏈路捆綁成一條邏輯通道。</p>
+                </div>
+
+                <div class="vlan-intro-card card animation-link-card">
+                    <h2><a href="lag_animation.html">🎬 前往動畫展示</a></h2>
+                    <p>點擊這裡，觀看 Link Aggregation 如何實現負載平衡，並在其中一條鏈路中斷時，無縫地保障網路傳輸的連續性。</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+    <script src="mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+</body>
+</html>

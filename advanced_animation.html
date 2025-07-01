@@ -15,20 +15,28 @@
 				<li><a href="hardware_architecture_intro.html">Switch硬體架構介紹</a></li>
 				<li><a href="hardware_interface_intro.html">Switch硬體介面介紹</a></li>
                 <li><a href="ingress_egress_intro.html">Ingress/Egress</a></li>
+                
                 <li><a href="l2_intro.html">L2 Switch基礎入門</a></li>
+                
                 <li><a href="arp_intro.html">ARP 觀念解說</a></li>
 				<li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
                 <li><a href="mmu_intro.html">MMU 觀念解說</a></li>
                 <li><a href="flow_control_animation.html">Flow Control</a></li>
-                <li><a href="vlan_animation.html">VLAN</a></li>
-                <li><a href="advanced_animation.html">L2/L3 進階動畫</a></li>
+                <li><a href="vlan_intro.html">VLANs</a></li>
+                    <li><a href="stp_intro.html">Spanning Tree Protocol (STP)</a></li>
+                    <li><a href="lag_intro.html">Link Aggregation (LAG)</a></li>
+                    <li><a href="qos_intro.html">Quality of Service (QoS)</a></li>
+                
+                <li><a href="jumbo_frames_intro.html">Jumbo Frames (巨型訊框)</a></li>
+                <li><a href="switch_management_intro.html">Switch Management (Switch管理)</a></li>
+                
             </ul>
         </nav>
     </div>
     <div class="main-content-wrapper">
     <header>
         <h1>L2/L3 進階動畫：深入探索 MAC學習、廣播、單播與 L3 路由 ARP 解析</h1>
-        <p class="subtitle">進階互動式 L2/L3 交換器動畫</p>
+        <p class="subtitle">進階互動式 L2/L3 Switch動畫</p>
     </header>
 
     
@@ -57,27 +65,27 @@
                         </table>
                     </div>
                 </div>
-                <div class="controls-explanation-wrapper">
-                    <div class="controls card">
-                        <h2>動畫控制器</h2>
-                        <div class="control-group">
-                            <label for="scenario">選擇場景：</label>
-                            <select id="scenario">
-                                <option value="arl_table_operation">1. ARL Table 運作演示</option>
-                                <option value="l2_flood">2. L2 首次通訊 (Flooding)</option>
-                                <option value="l2_unicast">3. L2 後續通訊 (Unicast)</option>
-                                <option value="l3_arp">4. L3 跨網段通訊 (含 ARP)</option>
-                            </select>
-                        </div>
-                        <div class="control-group">
-                            <button id="start-btn">開始動畫</button>
-                            <button id="reset-btn">重設</button>
-                        </div>
+            </div>
+            <div class="controls-explanation-wrapper">
+                <div class="controls card">
+                    <h2>動畫控制器</h2>
+                    <div class="control-group">
+                        <label for="scenario">選擇場景：</label>
+                        <select id="scenario">
+                            <option value="arl_table_operation">1. ARL Table 運作演示</option>
+                            <option value="l2_flood">2. L2 首次通訊 (Flooding)</option>
+                            <option value="l2_unicast">3. L2 後續通訊 (Unicast)</option>
+                            <option value="l3_arp">4. L3 跨網段通訊 (含 ARP)</option>
+                        </select>
                     </div>
-                    <div id="explanation" class="card">
-                        <h2>運作解說</h2>
-                        <p id="explanation-text">請選擇一個場景並點擊「開始動畫」。</p>
+                    <div class="control-group">
+                        <button id="start-btn">開始動畫</button>
+                        <button id="reset-btn">重設</button>
                     </div>
+                </div>
+                <div id="explanation" class="card">
+                    <h2>運作解說</h2>
+                    <p id="explanation-text">請選擇一個場景並點擊「開始動畫」。</p>
                 </div>
             </div>
         </div>
