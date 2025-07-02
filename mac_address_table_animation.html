@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jumbo Frames 動畫 - L2 Switch解說</title>
+    <title>MAC Address Table 動畫 - L2 Switch解說</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -32,16 +32,16 @@
     </div>
     <div class="main-content-wrapper">
         <header>
-            <h1>Jumbo Frames 動畫展示</h1>
+            <h1>MAC Address Table 動畫展示</h1>
         </header>
         <main>
-            <canvas id="jumboFramesCanvas" width="800" height="600"></canvas>
+            <canvas id="macTableCanvas" width="800" height="600"></canvas>
             <div id="controls">
                 <button id="startBtn">開始動畫</button>
                 <button id="resetBtn">重設</button>
             </div>
             <div id="explanation">
-                <p>此動畫展示 Jumbo Frames 如何透過傳輸更大的訊框來提高效率。</p>
+                <p>此動畫展示 Switch 如何建立與使用 MAC Address Table。</p>
                 <p id="step-explanation"></p>
             </div>
         </main>
@@ -50,6 +50,6 @@
         </footer>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="jumbo_frames.js"></script>
+    <script src="mac_address_table.js"></script>
 </body>
 </html>

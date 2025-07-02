@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAC Address Table 介紹 - L2 Switch解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+                <li><a href="hardware_architecture_intro.html">硬體架構</a></li>
+                <li><a href="hardware_interface_intro.html">硬體介面</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress 流量進出</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎</a></li>
+                <li><a href="mmu_intro.html">MMU 記憶體管理</a></li>
+                <li><a href="arp_intro.html">ARP 協定</a></li>
+                <li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="flow_control_animation.html">流量控制 (Flow Control)</a></li>
+                <li><a href="jumbo_frames_intro.html">巨型訊框 (Jumbo Frames)</a></li>
+                <li><a href="vlan_intro.html">VLANs (虛擬區域網路)</a></li>
+                <li><a href="stp_intro.html">STP (生成樹協定)</a></li>
+                <li><a href="lag_intro.html">LAG (鏈路聚合)</a></li>
+                <li><a href="qos_intro.html">QoS (服務品質)</a></li>
+                <li><a href="switch_management_intro.html">交換器管理 (Switch Management)</a></li>
+                <li><a href="poe_intro.html">乙太網路供電 (PoE)</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>MAC Address Table：Switch 的大腦筆記本</h1>
+            <p class="subtitle">探索 Switch 如何學習、轉發、過濾和廣播封包</p>
+        </header>
+        <main class="content-section active">
+            <div class="intro-container">
+                <div class="intro-card card">
+                    <h2>MAC 位址表：Switch 的核心機制</h2>
+                    <p><strong>MAC Address Table (媒體存取控制位址表)</strong> 是 Layer 2 Switch 運作的絕對核心。您可以把它想像成是 Switch 的大腦或筆記本，用來記錄網路上每個設備的實體位址 (MAC Address) 以及它所連接的埠口 (Port)。</p>
+                    <div class="intro-columns">
+                        <div class="intro-column">
+                            <h3><span class="emoji">🎓</span> 學習 (Learning)</h3>
+                            <p>當一個封包進入 Switch 的某個埠口時，Switch 會檢查封包的「來源 MAC 位址」。如果這個位址不在筆記本上，Switch 就會把這個 MAC 位址和它進入的埠口號碼記錄下來。這就是「學習」過程。</p>
+                        </div>
+                        <div class="intro-column">
+                            <h3><span class="emoji">🎯</span> 轉發 (Forwarding)</h3>
+                            <p>當 Switch 收到一個封包，它會查看封包的「目的 MAC 位址」。如果在筆記本中找到了對應的記錄，Switch 就會非常有效率地，只將這個封包從記錄中的那個特定埠口發送出去。這就是「轉發」，或稱為「單播」。</p>
+                        </div>
+                        <div class="intro-column">
+                            <h3><span class="emoji">📢</span> 廣播 (Flooding)</h3>
+                            <p>如果 Switch 在筆記本中找不到目的 MAC 位址的記錄（或者目的位址本身就是一個廣播位址），它就會採取「廣播」策略：將封包複製並發送到除了來源埠以外的所有其他埠口。這是確保封包能到達未知位置設備的方法。</p>
+                        </div>
+                    </div>
+                    <p class="intro-summary">理解 MAC 位址表的運作原理，是掌握 L2 交換器所有行為的基礎。接下來的動畫將生動地展示這個過程。</p>
+                    <p class="intro-summary"><a href="mac_address_table_animation.html">🎬 前往 MAC Address Table 動畫展示</a></p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+</body>
+</html>

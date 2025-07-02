@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power over Ethernet (PoE) 介紹 - L2 Switch解說</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+                <li><a href="hardware_architecture_intro.html">硬體架構</a></li>
+                <li><a href="hardware_interface_intro.html">硬體介面</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress 流量進出</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎</a></li>
+                <li><a href="mmu_intro.html">MMU 記憶體管理</a></li>
+                <li><a href="arp_intro.html">ARP 協定</a></li>
+                <li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="flow_control_animation.html">流量控制 (Flow Control)</a></li>
+                <li><a href="jumbo_frames_intro.html">巨型訊框 (Jumbo Frames)</a></li>
+                <li><a href="vlan_intro.html">VLANs (虛擬區域網路)</a></li>
+                <li><a href="stp_intro.html">STP (生成樹協定)</a></li>
+                <li><a href="lag_intro.html">LAG (鏈路聚合)</a></li>
+                <li><a href="qos_intro.html">QoS (服務品質)</a></li>
+                <li><a href="switch_management_intro.html">交換器管理 (Switch Management)</a></li>
+                <li><a href="poe_intro.html">乙太網路供電 (PoE)</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>Power over Ethernet (PoE)：一線搞定，供電又傳輸</h1>
+            <p class="subtitle">了解如何透過乙太網路線為設備提供電力</p>
+        </header>
+        <main class="content-section active">
+            <div class="intro-container">
+                <div class="intro-card card">
+                    <h2>PoE：簡化佈線的革命性技術</h2>
+                    <p><strong>Power over Ethernet (PoE, 乙太網路供電)</strong> 是一項智慧的技術，它允許網路線（例如 Cat5e/Cat6）在傳輸資料的同時，也能為連接的設備提供直流電。這意味著您不再需要為每個網路設備都尋找一個電源插座。</p>
+                    <div class="intro-columns">
+                        <div class="intro-column">
+                            <h3><span class="emoji">🔌</span> 運作原理</h3>
+                            <p>一台支援 PoE 的交換器 (稱為 PSE - Power Sourcing Equipment)，會偵測連接的設備 (稱為 PD - Powered Device) 是否也支援 PoE。如果支援，交換器就會透過網路線上的空閒線對或資料線對，安全地輸送電力給設備。</p>
+                        </div>
+                        <div class="intro-column">
+                            <h3><span class="emoji">💡</span> 主要優勢</h3>
+                            <ul>
+                                <li><strong>節省成本：</strong>無需額外的電線、插座和電工安裝費用。</li>
+                                <li><strong>安裝靈活：</strong>可以將設備安裝在任何網路線能到達的地方，即使附近沒有電源插座，例如天花板或戶外。</li>
+                                <li><strong>集中管理：</strong>可以透過交換器遠端重啟或關閉設備電源，方便管理。</li>
+                                <li><strong>高可靠性：</strong>將 PoE 交換器連接到 UPS (不斷電系統)，即可為所有連接的設備提供備援電力。</li>
+                            </ul>
+                        </div>
+                        <div class="intro-column">
+                            <h3><span class="emoji">📷</span> 常見應用</h3>
+                            <p>PoE 技術被廣泛應用於各種中低功率的網路設備，包括：</p>
+                            <ul>
+                                <li>無線網路基地台 (Wireless APs)</li>
+                                <li>網路攝影機 (IP Cameras)</li>
+                                <li>網路電話 (VoIP Phones)</li>
+                                <li>門禁系統、感應器等</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="intro-summary">接下來的動畫將展示 PoE 交換器如何同時為設備提供資料和電力。</p>
+                    <p class="intro-summary"><a href="poe_animation.html">🎬 前往 PoE 動畫展示</a></p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+</body>
+</html>
