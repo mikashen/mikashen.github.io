@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網路Switch考試</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Exam specific styles */
+        .exam-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .question-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .question-section h3 {
+            color: #3498db;
+            margin-top: 0;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .options input[type="radio"], .options input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        textarea {
+            width: 98%;
+            min-height: 80px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .submit-btn {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+        .result-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">返回主頁</a></li>
+                <li><a href="hardware_architecture_intro.html">硬體架構</a></li>
+                <li><a href="hardware_interface_intro.html">硬體介面</a></li>
+                <li><a href="ingress_egress_intro.html">Ingress/Egress 流量進出</a></li>
+                <li><a href="l2_intro.html">L2 Switch基礎</a></li>
+                <li><a href="mmu_intro.html">MMU 記憶體管理</a></li>
+                <li><a href="arp_intro.html">ARP 協定</a></li>
+                <li><a href="unicast_multicast_broadcast_animation.html">單播/多播/廣播</a></li>
+                <li><a href="flow_control_animation.html">流量控制 (Flow Control)</a></li>
+                <li><a href="jumbo_frames_intro.html">巨型訊框 (Jumbo Frames)</a></li>
+                <li><a href="vlan_intro.html">VLANs (虛擬區域網路)</a></li>
+                <li><a href="stp_intro.html">STP (生成樹協定)</a></li>
+                <li><a href="lag_intro.html">LAG (鏈路聚合)</a></li>
+                <li><a href="qos_intro.html">QoS (服務品質)</a></li>
+                <li><a href="switch_management_intro.html">交換器管理 (Switch Management)</a></li>
+                <li><a href="poe_intro.html">乙太網路供電 (PoE)</a></li>
+                <li><a href="exam.html">知識測驗</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content-wrapper">
+        <header>
+            <h1>網路Switch知識測驗</h1>
+            <p class="subtitle">檢測您對網路Switch核心概念的理解</p>
+        </header>
+        <main class="exam-container">
+            <div id="student-info-section">
+                <h2>考生資訊</h2>
+                <div class="question-section">
+                    <label for="student-name">姓名:</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="question-section">
+                    <label for="student-email">電子郵件:</label>
+                    <input type="email" id="student-email" required>
+                </div>
+                <button id="start-exam-btn">開始測驗</button>
+            </div>
+
+            <div id="exam-section" class="hidden">
+                <h2>測驗題目</h2>
+                <form id="exam-form">
+                    <!-- Questions will be loaded here by JavaScript -->
+                </form>
+                <button id="submit-exam-btn" class="submit-btn">提交測驗</button>
+            </div>
+
+            <div id="result-section" class="hidden">
+                <h2>測驗結果</h2>
+                <p id="score-display"></p>
+                <p id="submission-status"></p>
+            </div>
+        </main>
+        <footer>
+            <p>Mika Shen製作</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="exam.js"></script>
+</body>
+</html>

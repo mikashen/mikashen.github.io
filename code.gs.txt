@@ -1,0 +1,93 @@
+    1     //
+      ----------------------------------------------------------
+      ---------------
+    2     //  設定區 (請務必填寫以下兩個變數)
+    3     //
+      ----------------------------------------------------------
+      ---------------
+    4
+    5     // 1. 您的 Google Sheet 的 ID (從網址中複製)
+    6     const SPREADSHEET_ID =
+      '1TZhY5MYBBwxVpY5232HuIpzyfXEYNSBGkjESOvPczZ8';
+    7
+    8     // 2. 您要寫入資料的工作表名稱
+    9     const SHEET_NAME = 'L2_Switch_Test_record';
+   10
+   11     //
+      ----------------------------------------------------------
+      ---------------
+   12     //  主要程式邏輯 (請勿修改以下內容)
+   13     //
+      ----------------------------------------------------------
+      ---------------
+   14
+   15     function doPost(e) {
+   16       const lock = LockService.getScriptLock();
+   17       lock.waitLock(30000);
+   18
+   19       try {
+   20         const sheet = SpreadsheetApp.openById(
+      SPREADSHEET_ID).getSheetByName(SHEET_NAME);
+   21
+   22         if (!sheet) {
+   23           throw new Error(`找不到名稱為 "${SHEET_NAME}"
+      的工作表。`);
+   24         }
+   25
+   26         if (!e || !e.postData || !e.postData.contents) {
+   27           throw new Error("沒有收到任何資料。");
+   28         }
+   29
+   30         const data = JSON.parse(e.postData.contents);
+   31
+   32         // 建立要寫入的資料列
+   33         const newRow = [
+   34           data.timestamp || new Date(),
+   35           data.studentName || '',
+   36           data.studentEmail || '',
+   37           data.score !== undefined ? data.score : '',
+   38           data.totalQuestions !== undefined ? data.
+      totalQuestions : ''
+   39         ];
+   40
+   41         // 將 15 道題目的資料加入到資料列中
+   42         for (let i = 0; i < 15; i++) {
+   43           if (data.questions && data.questions[i]) {
+   44             newRow.push(data.questions[i].questionText ||
+      '');
+   45             newRow.push(data.questions[i].studentAnswer ||
+      '');
+   46             newRow.push(data.questions[i].correctAnswer ||
+      '');
+   47           } else {
+   48             // 如果題目不夠 15 題，用空字串填滿
+   49             newRow.push('');
+   50             newRow.push('');
+   51             newRow.push('');
+   52           }
+   53         }
+   54
+   55         sheet.appendRow(newRow);
+   56
+   57         return createJsonResponse({ 'result': 'success'
+      });
+   58
+   59       } catch (error) {
+   60         // 記錄詳細的錯誤訊息，方便除錯
+   61         Logger.log(`發生錯誤: ${error.message}\n堆疊追蹤:
+      ${error.stack}`);
+   62         return createJsonResponse({ 'result': 'error',
+      'message': error.message });
+   63       } finally {
+   64         lock.releaseLock();
+   65       }
+   66     }
+   67
+   68     function createJsonResponse(data) {
+   69       const response = ContentService.createTextOutput(
+      JSON.stringify(data)).setMimeType(ContentService.MimeType.
+      JSON);
+   70       // 為了避免跨域問題，我們不設定 CSP 頭，並依賴前端的
+      no-cors 模式
+   71       return response;
+   72     }
