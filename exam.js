@@ -137,37 +137,126 @@ const questionPool = {
 		{ "q": "L2 Switch 運作在 OSI 模型的網路層 (Network Layer)。 (是/否)", "ans": "否" }
     ],
     open: [
-        { q: '請解釋單播、多播和廣播三種傳輸模式的區別。', ans: '' },
-        { q: '請說明 PoE 技術在實際網路部署中的兩個主要優勢。', ans: '' },
-        { q: '請說明 VLAN 如何實現廣播域隔離。', ans: '' },
-        { q: '請說明巨型訊框 (Jumbo Frames) 如何提高網路傳輸效率。', ans: '' },
-        { q: '請說明您認為網路流量控制的重要性。', ans: '' },
-        { q: '請簡述 L2 Switch 學習 MAC 位址的過程。', ans: '' },
-        { q: '請簡述 QoS 在網路中的作用。', ans: '' },
-        { q: '請簡述 STP 協定如何防止網路迴圈。', ans: '' },
-        { q: '請簡述 Switch 的 CLI 管理方式與 Web 介面管理方式的優缺點。', ans: '' },
-        { q: '請簡述您對 MMU (Memory Management Unit) 在 Switch 中的作用理解。', ans: '' },
-        { q: '請簡述 Switch 的 CLI 管理方式與 Web 介面管理方式的優缺點。', ans: '' },
-		{ "q": "當 L2 Switch 在其 MAC 位址表中找不到目的地位址時，它會如何處理該訊框 (Frame)？", "ans": "" },
-		{ "q": "請解釋碰撞域 (Collision Domain) 與廣播域 (Broadcast Domain) 的差異，並說明 L2 Switch 如何影響這兩者。", "ans": "" },
-		{ "q": "請說明 MAC 位址表 (MAC Address Table) 在 L2 Switch 中的主要功能是什麼？", "ans": "" },
-		{ "q": "請解釋 802.1Q Trunk Port 的主要用途是什麼？", "ans": "" },
-		{ "q": "請說明在 802.1Q Trunk 中，原生 VLAN (Native VLAN) 的作用是什麼？", "ans": "" },
-		{ "q": "請簡述交換器上 Access Port 與 Trunk Port 的功能差異。", "ans": "" },
-		{ "q": "在 STP (Spanning Tree Protocol) 中，根橋 (Root Bridge) 扮演什麼角色？", "ans": "" },
-		{ "q": "請說明 STP 中的 PortFast 功能有何用途？為什麼它能加速網路收斂？", "ans": "" },
-		{ "q": "相較於傳統的 STP (802.1D)，RSTP (802.1w) 做了哪些主要改進以加快收斂速度？", "ans": "" },
-		{ "q": "請說明鏈路聚合 (Link Aggregation) 的主要目的，並舉出其兩項優點。", "ans": "" },
-		{ "q": "請解釋交換器上的埠口安全 (Port Security) 功能如何運作及其主要目的。", "ans": "" },
-		{ "q": "請說明 DHCP Snooping (DHCP 窺探) 的功能，以及它如何防止網路攻擊。", "ans": "" },
-		{ "q": "請簡述風暴控制 (Storm Control) 在交換器上的作用。", "ans": "" },
-		{ "q": "請比較直通式 (Cut-Through) 和儲存轉發式 (Store-and-Forward) 這兩種交換模式的優缺點。", "ans": "" },
-		{ "q": "請說明流量控制 (Flow Control, IEEE 802.3x) 在交換器中的作用機制。", "ans": "" },
-		{ "q": "請解釋 Auto-MDI/MDIX 功能的作用，它解決了什麼問題？", "ans": "" },
-		{ "q": "請說明埠口鏡像 (Port Mirroring/SPAN) 的功能，並舉出一個適合使用它的情境。", "ans": "" },
-		{ "q": "請簡述 SNMP 協定在管理和監控交換器時扮演的角色。", "ans": "" },
-		{ "q": "請說明 PoE (802.3af) 與 PoE+ (802.3at) 在供電能力上的主要差異。", "ans": "" },
-		{ "q": "請解釋什麼是堆疊式交換器 (Stackable Switch)，以及使用堆疊技術的主要優勢為何？", "ans": "" }
+    {
+        "q": "請解釋單播、多播和廣播三種傳輸模式的區別。",
+        "ans": "單播 (Unicast) 是一對一傳輸；多播 (Multicast) 是一對特定群組傳輸；廣播 (Broadcast) 則是在同一網域內，一對所有的傳輸。"
+    },
+    {
+        "q": "請說明 PoE 技術在實際網路部署中的兩個主要優勢。",
+        "ans": "1. 簡化佈線：只需一條網路線即可同時供電和傳輸資料，降低安裝複雜度與成本。 2. 集中管理電源：可透過交換器遠端重啟設備或由 UPS 統一供電，提升管理效率與可靠性。"
+    },
+    {
+        "q": "請說明 VLAN 如何實現廣播域隔離。",
+        "ans": "VLAN 將一個實體交換器劃分成多個邏輯上的獨立網路，每個 VLAN 都是一個獨立的廣播域。因此，一個 VLAN 內的廣播封包不會被轉發到其他 VLAN，從而實現隔離。"
+    },
+    {
+        "q": "請說明巨型訊框 (Jumbo Frames) 如何提高網路傳輸效率。",
+        "ans": "透過增加單一訊框 (Frame) 的承載容量（Payload），減少了需要傳輸的訊框總數。這降低了因處理每個訊框標頭所帶來的額外負擔 (overhead)，進而提升整體傳輸效能。"
+    },
+    {
+        "q": "請說明您認為網路流量控制的重要性。",
+        "ans": "流量控制能確保關鍵應用（如視訊或語音）獲得足夠的頻寬，避免網路壅塞，並提升整體網路使用的公平性與穩定性，防止單一應用或使用者佔用所有資源。"
+    },
+    {
+        "q": "請簡述 L2 Switch 學習 MAC 位址的過程。",
+        "ans": "當交換器從某個埠口收到一個訊框時，它會讀取訊框的來源 MAC 位址，並將這個 MAC 位址與接收埠口的對應關係記錄在自己的 MAC 位址表中。"
+    },
+    {
+        "q": "請簡述 QoS 在網路中的作用。",
+        "ans": "QoS (服務品質) 用於管理網路流量，透過為不同類型的數據（如視訊、語音、檔案傳輸）設定優先級，確保關鍵或對延遲敏感的應用能優先獲得網路資源，從而保障其傳輸品質。"
+    },
+    {
+        "q": "請簡述 STP 協定如何防止網路迴圈。",
+        "ans": "STP 透過在交換器之間交換訊息，自動計算出一個無迴圈的樹狀邏輯拓撲。它會邏輯性地阻斷 (Block) 造成迴圈的備援路徑，只保留一條活動路徑，從而防止廣播風暴的發生。"
+    },
+    {
+        "q": "請簡述 Switch 的 CLI 管理方式與 Web 介面管理方式的優缺點。",
+        "ans": "CLI 優點是功能強大、可自動化設定，缺點是學習門檻高；Web 介面優點是直觀易用，缺點是功能可能受限且反應較慢。"
+    },
+    {
+        "q": "請簡述您對 MMU (Memory Management Unit) 在 Switch 中的作用理解。",
+        "ans": "MMU (記憶體管理單元) 主要負責管理交換器內部的封包緩衝區 (Packet Buffer)。當流量突增或網路壅塞時，它會將封包暫存起來，防止數據遺失，並協助實現 QoS 的流量排隊管理。"
+    },
+    {
+        "q": "當 L2 Switch 在其 MAC 位址表中找不到目的地位址時，它會如何處理該訊框 (Frame)？",
+        "ans": "當交換器在 MAC 位址表中找不到目的地位址時，它會執行「泛洪」(Flooding) 操作，也就是將該訊框從所有其他埠口（除了接收該訊框的埠口）轉發出去。"
+    },
+    {
+        "q": "請解釋碰撞域 (Collision Domain) 與廣播域 (Broadcast Domain) 的差異，並說明 L2 Switch 如何影響這兩者。",
+        "ans": "碰撞域是訊號可能發生碰撞的範圍，廣播域是廣播訊框能傳達的範圍。L2 交換器的每個埠口都是一個獨立的碰撞域，有效減少了碰撞；但預設情況下，整個交換器屬於同一個廣播域。"
+    },
+    {
+        "q": "請說明 MAC 位址表 (MAC Address Table) 在 L2 Switch 中的主要功能是什麼？",
+        "ans": "其主要功能是記錄網路中各設備的 MAC 位址與其所連接的交換器埠口之間的對應關係。這使得交換器能夠將訊框精確地轉發到目的埠口，而非廣播到所有埠口，從而提升網路效率。"
+    },
+    {
+        "q": "請解釋 802.1Q Trunk Port 的主要用途是什麼？",
+        "ans": "主要用途是在交換器之間建立一條可以同時傳輸多個 VLAN 流量的鏈路。它透過在訊框上添加 VLAN 標籤 (Tag) 來區分不同 VLAN 的數據。"
+    },
+    {
+        "q": "請說明在 802.1Q Trunk 中，原生 VLAN (Native VLAN) 的作用是什麼？",
+        "ans": "在 802.1Q Trunk 鏈路上，原生 VLAN 的流量在傳輸時是不會被加上 VLAN 標籤 (Untagged) 的。其主要作用是為了與不支援 VLAN 標記的傳統設備相容。"
+    },
+    {
+        "q": "請簡述交換器上 Access Port 與 Trunk Port 的功能差異。",
+        "ans": "Access Port 通常連接終端設備（如電腦），且只屬於單一 VLAN。Trunk Port 則用於連接其他交換器，可同時承載多個 VLAN 的流量。"
+    },
+    {
+        "q": "在 STP (Spanning Tree Protocol) 中，根橋 (Root Bridge) 扮演什麼角色？",
+        "ans": "根橋是 STP 拓撲中的邏輯中心點。所有交換器都以它為基準來計算最短路徑，從而建立一個無迴圈的樹狀網路結構。"
+    },
+    {
+        "q": "請說明 STP 中的 PortFast 功能有何用途？為什麼它能加速網路收斂？",
+        "ans": "PortFast 功能讓交換器埠口可以跳過 STP 正常的 Listening 和 Learning 狀態，直接進入轉發狀態。它能加速是因為省去了標準 STP 所需的 30 秒延遲，適用於連接終端設備。"
+    },
+    {
+        "q": "相較於傳統的 STP (802.1D)，RSTP (802.1w) 做了哪些主要改進以加快收斂速度？",
+        "ans": "RSTP 主要改進包括：1. 定義了備用埠口 (Alternate Port)，可在主路徑失效時立即切換。 2. 採用更主動的拓撲變更通知機制，而非被動等待計時器超時。"
+    },
+    {
+        "q": "請說明鏈路聚合 (Link Aggregation) 的主要目的，並舉出其兩項優點。",
+        "ans": "主要目的是將多條實體鏈路捆綁成一條邏輯鏈路。其兩大優點是：1. 增加頻寬：合併多條鏈路的總頻寬。 2. 提高可靠性：當其中一條鏈路故障時，提供備援。"
+    },
+    {
+        "q": "請解釋交換器上的埠口安全 (Port Security) 功能如何運作及其主要目的。",
+        "ans": "它能限制特定埠口所能連接的設備 MAC 位址數量，甚至能指定特定 MAC。其主要目的是防止未經授權的設備接入網路，提升存取安全。"
+    },
+    {
+        "q": "請說明 DHCP Snooping (DHCP 窺探) 的功能，以及它如何防止網路攻擊。",
+        "ans": "它透過區分信任與不信任埠口，只允許來自「信任」埠口（合法 DHCP 伺服器）的回應通過，從而有效防止駭客架設偽造的 DHCP 伺服器來發動攻擊。"
+    },
+    {
+        "q": "請簡述風暴控制 (Storm Control) 在交換器上的作用。",
+        "ans": "風暴控制用於監控埠口上的廣播、多播等流量。當流量速率超過預設門檻時，交換器會限制或丟棄超額的封包，以防止網路因「廣播風暴」而癱瘓。"
+    },
+    {
+        "q": "請比較直通式 (Cut-Through) 和儲存轉發式 (Store-and-Forward) 這兩種交換模式的優缺點。",
+        "ans": "儲存轉發式會檢查完整個訊框再轉發，可靠性高但延遲較大；直通式只讀取位址後就立即轉發，延遲極低但可能會轉發錯誤訊框。"
+    },
+    {
+        "q": "請說明流量控制 (Flow Control, IEEE 802.3x) 在交換器中的作用機制。",
+        "ans": "當交換器的接收緩衝區即將滿載時，它會向發送端發送一個「PAUSE」訊框，要求對方暫停傳送。這能防止因接收端處理不及而造成的封包遺失。"
+    },
+    {
+        "q": "請解釋 Auto-MDI/MDIX 功能的作用，它解決了什麼問題？",
+        "ans": "此功能讓交換器埠口能自動偵測網路線類型（直通或跳線）並調整內部接腳。它解決了以往需要根據設備選擇特定線材的麻煩。"
+    },
+    {
+        "q": "請說明埠口鏡像 (Port Mirroring/SPAN) 的功能，並舉出一個適合使用它的情境。",
+        "ans": "此功能可將一個來源埠口的流量複製到指定的目的埠口。常用於網路故障排除，將有問題的伺服器流量鏡像出來，讓網路分析儀進行監控抓包。"
+    },
+    {
+        "q": "請簡述 SNMP 協定在管理和監控交換器時扮演的角色。",
+        "ans": "SNMP 讓網管人員可遠端查詢交換器的狀態（如埠口流量）、修改設定，或在設備異常時接收主動告警 (Trap)，是集中化網路監控的基礎。"
+    },
+    {
+        "q": "請說明 PoE (802.3af) 與 PoE+ (802.3at) 在供電能力上的主要差異。",
+        "ans": "主要差異在於供電能力。標準 PoE (802.3af) 每埠最多提供 15.4W 電力，而 PoE+ (802.3at) 則可提供高達 30W 的電力，以支援更高功耗的設備。"
+    },
+    {
+        "q": "請解釋什麼是堆疊式交換器 (Stackable Switch)，以及使用堆疊技術的主要優勢為何？",
+        "ans": "堆疊是將多台實體交換器連接起來，使其在邏輯上運作成單一交換器的技術。其主要優勢是：1. 簡化管理：只需一個 IP 就能管理所有交換器。 2. 提升擴充性：可輕易地增加交換器來擴充埠口。"
+    }
 	],
 };
 
@@ -279,11 +368,14 @@ async function submitExam(event) {
     }
 
     const { score, studentAnswers } = calculateScore();
-    scoreDisplay.textContent = `您的分數是：${score} / ${selectedQuestions.length}`; // Display score for objective questions
+    const totalObjectiveQuestions = selectedQuestions.filter(q => q.ans !== '').length;
+    scoreDisplay.textContent = `您的客觀題分數是：${score} / ${totalObjectiveQuestions}`;
 
     submissionStatus.textContent = '正在提交結果...';
     resultSection.classList.remove('hidden');
     examSection.classList.add('hidden');
+
+    displayResults(studentAnswers);
 
     const examData = {
         timestamp: new Date().toLocaleString(),
@@ -310,14 +402,42 @@ async function submitExam(event) {
             body: JSON.stringify(examData),
         });
         console.log('Fetch 請求已發送。');
-        // Since mode is 'no-cors', response.ok will always be true. 
-        // We rely on the Apps Script to log success/failure.
-        submissionStatus.textContent = '結果已提交！感謝您的參與。';
+        submissionStatus.textContent = '結果已成功提交至 Google Sheet！感謝您的參與。';
         console.log('提交成功訊息已顯示。');
     } catch (error) {
         console.error('提交失敗:', error);
-        submissionStatus.textContent = '提交失敗，請稍後再試。';
+        submissionStatus.textContent = '提交至 Google Sheet 失敗，但您的結果已顯示在下方。';
     }
+}
+
+function displayResults(studentAnswers) {
+    const resultDetailsContainer = document.getElementById('result-details');
+    resultDetailsContainer.innerHTML = ''; // Clear previous results
+
+    selectedQuestions.forEach((qData, index) => {
+        const studentAnswer = studentAnswers[`q${index}`] || '未作答';
+        
+        const questionResultDiv = document.createElement('div');
+        questionResultDiv.classList.add('result-question');
+
+        let resultHtml = `<h4>Q${index + 1}. ${qData.q}</h4>`;
+        resultHtml += `<p><strong>您的答案:</strong> ${studentAnswer}</p>`;
+
+        // Determine question type for accurate styling
+        if (qData.options || qData.ans === '是' || qData.ans === '否') { // MCQ or T/F
+            const isCorrect = studentAnswer === qData.ans;
+            questionResultDiv.classList.add(isCorrect ? 'correct' : 'incorrect');
+            if (!isCorrect) {
+                resultHtml += `<p><strong>正確答案:</strong> ${qData.ans}</p>`;
+            }
+        } else { // Open-ended
+            questionResultDiv.classList.add('open-ended');
+            resultHtml += `<p><strong>參考答案:</strong> ${qData.ans}</p>`;
+        }
+
+        questionResultDiv.innerHTML = resultHtml;
+        resultDetailsContainer.appendChild(questionResultDiv);
+    });
 }
 
 // --- Event Listeners ---

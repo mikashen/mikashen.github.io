@@ -67,6 +67,43 @@
             color: #2c3e50;
         }
         .hidden { display: none; }
+        .result-details-container {
+            text-align: left;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .result-question {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 6px solid;
+        }
+        .result-question.correct {
+            background-color: #e8f5e9; /* light green */
+            border-left-color: #4caf50; /* green */
+        }
+        .result-question.incorrect {
+            background-color: #ffebee; /* light red */
+            border-left-color: #f44336; /* red */
+        }
+        .result-question.open-ended {
+            background-color: #e3f2fd; /* light blue */
+            border-left-color: #2196f3; /* blue */
+        }
+        .result-question h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .result-question p {
+            margin: 5px 0;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        .result-question p strong {
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +161,7 @@
                 <h2>測驗結果</h2>
                 <p id="score-display"></p>
                 <p id="submission-status"></p>
+                <div id="result-details" class="result-details-container"></div>
             </div>
         </main>
         <footer>
